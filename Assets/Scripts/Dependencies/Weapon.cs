@@ -9,7 +9,9 @@ namespace gameCore
     internal class Weapon : Item, IHoldable
     {
 
-        public Weapon(int width, int height) : base(width, height) { }
+        public Weapon(int height, int width, bool isPrimary) : base(height, width) { IsPrimary = isPrimary; }
+
+        public bool IsPrimary { get; private set; }
 
     }
 }

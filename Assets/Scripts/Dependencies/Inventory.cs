@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace gameCore
 {
     internal class Inventory
     {
-        private static readonly int[] MAIN_SLOT_SIZE = new int[] { 5, 2 };
-        private static readonly int[] SECONDARY_SLOT_SIZE = new[] { 4, 2 };
         private static readonly int[] INVENTORY_SIZE = new[] { 6, 10 };
 
         private bool[,] _slots;
@@ -21,24 +17,76 @@ namespace gameCore
         }
         public bool addItem(Item item)
         {
-            if (item is IHoldable) return false;
+            if (item is IHoldable)
+            {
+                IHoldable holdableItem = (IHoldable)item;
+                bool emptyPrimary = PrimarySlot == null;
+                bool emptySecondary = SecondarySlot == null;
+
+                if (holdableItem.IsPrimary)
+                {
+                    if (emptyPrimary)
+                    {
+                        PrimarySlot = holdableItem;
+                        return true;
+                    }
+                    else return addToSlots(item);
+                }
+                else
+                {
+                    if (emptySecondary)
+                    {
+                        SecondarySlot = holdableItem;
+                        return true;
+                    }                       
+                    else if (emptyPrimary)
+                    {
+                        PrimarySlot = holdableItem;
+                        return true;
+                    }
+                    else return addToSlots(item);
+                }
+            }
             else
             {
-                for (int i = 0; i < Size[0]; i++)
+                return addToSlots(item);
+            }
+        }
+        private bool addToSlots(Item item)
+        {
+            if (tryToAddToSlots(item)) return true;
+            else if (item.getSize()[0] < 2 && item.getSize()[1] < 2)
+                return false;
+            else
+            {
+                item.rotateSize();
+                item.IsRotated = true;
+                if (tryToAddToSlots(item)) return true;
+                else
                 {
-                    for (int j = 0; j < Size[1]; j++)
+                    item.rotateSize();
+                    item.IsRotated = false;
+                    return false;
+                }
+            }
+
+        }
+        private bool tryToAddToSlots(Item item)
+        {
+            for (int i = 0; i < Size[0]; i++)
+            {
+                for (int j = 0; j < Size[1]; j++)
+                {
+                    if (i + item.getSize()[0] > Size[0]) return false;
+                    if (j + item.getSize()[1] > Size[1]) j = Size[1];
+                    else if (checkSubslots(i, j, item.getSize()[0], item.getSize()[1]))
                     {
-                        if (i + item.getSize()[0] > Size[0]) return false;
-                        if (j + item.getSize()[1] > Size[1]) j = Size[1];
-                        else if (checkSubslots(i, j, item.getSize()[0], item.getSize()[1]))
-                        {
-                            setSlots(i, j, item.getSize()[0], item.getSize()[1]);
-                            return true;
-                        }
+                        setSlots(i, j, item.getSize()[0], item.getSize()[1]);
+                        return true;
                     }
                 }
-                return false;
-            }  
+            }
+            return false;
         }
         private bool checkSubslots(int iStart, int jStart, int iSize, int jSize)
         {
@@ -63,17 +111,21 @@ namespace gameCore
         }
         public void showInventory()
         {
+            StringBuilder sb = new StringBuilder("");
             for (int i = 0; i < Size[0]; i++)
             {
                 for (int j = 0; j < Size[1]; j ++)
                 {
-                    if (_slots[i, j] == true) Console.Write(1.ToString());
-                    else Console.Write(0.ToString());
+                    if (_slots[i, j] == true) sb.Append(1.ToString() + '\t');
+                    else sb.Append(0.ToString() + '\t');
                 }
-                Console.Write('\n');
+                sb.Append("\n\n\n");
             }
+            Debug.Log(sb.ToString());
         }
 
+        public IHoldable PrimarySlot { get; set; }
+        public IHoldable SecondarySlot { get; set; }
         public int[] Size { get; private set; }
     }
 }
