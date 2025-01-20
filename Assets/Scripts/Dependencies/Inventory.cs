@@ -15,7 +15,7 @@ namespace gameCore
             Size = new int[] { height, width };
             _slots = new bool[height, width];
         }
-        public bool addItem(Item item)
+        public bool addItem(IItem item)
         {
             if (item is IHoldable)
             {
@@ -30,7 +30,7 @@ namespace gameCore
                         PrimarySlot = holdableItem;
                         return true;
                     }
-                    else return addToSlots(item);
+                    else return addToSlots(item.Item);
                 }
                 else
                 {
@@ -44,12 +44,12 @@ namespace gameCore
                         PrimarySlot = holdableItem;
                         return true;
                     }
-                    else return addToSlots(item);
+                    else return addToSlots(item.Item);
                 }
             }
             else
             {
-                return addToSlots(item);
+                return addToSlots(item.Item);
             }
         }
         private bool addToSlots(Item item)
