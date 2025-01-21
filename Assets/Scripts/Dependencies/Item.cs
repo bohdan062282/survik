@@ -13,18 +13,26 @@ namespace gameCore
         private string _name;
         private int[] _size;
         private GameObject _prefab;
+        private GameObject _gameObject;
+        public ItemState State { get; private set; }
 
-        public Item(GameObject prefab, string name, int height, int width)
+        public Item(GameObject prefab, string name, int height, int width, ItemState state)
         {
             _name = name;
             _prefab = prefab;
             _size = new int[] { height, width };
+            State = state;
         }
         public void Instantiate(Vector3 position)
         {
-            GameObject gameObject = UnityEngine.Object.Instantiate(_prefab, position, Quaternion.identity);
-            gameObject.GetComponent<IItem>().Initialize(this);
+            _gameObject = UnityEngine.Object.Instantiate(_prefab, position, Quaternion.identity);
+            _gameObject.GetComponent<IItem>().Initialize(this);
 
+        }
+        public void take()
+        {
+            State = ItemState.ININVENTORY;
+            _gameObject.SetActive(false);
         }
         public void rotateSize()
         {
@@ -37,4 +45,5 @@ namespace gameCore
         public bool IsRotated { get; set; } = false;
         
     }
+    internal enum ItemState { DROPPED, ININVENTORY, STAND };
 }

@@ -410,12 +410,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   rotationSpeed: 10
+  interractDistance: 6
   characterController: {fileID: 4833565646433117583}
   cameraTarget: {fileID: 3126818498147401177}
   cameraTransform: {fileID: 4593075016360823292}
   itemLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  uiTargetItemText: {fileID: 0}
   movementAction:
     m_Name: 
     m_Type: 0
@@ -439,6 +441,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: dd1190c6-ac6f-48e4-b12d-c307aa8254df
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  interractAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a1503d59-85fd-4a07-a68f-fdb6688d1b8e
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

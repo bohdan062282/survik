@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.Rendering.BoolParameter;
 using UnityEngineInternal;
+using TMPro;
 
 
 public class PlayerController : MonoBehaviour
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [SerializeField][Range(5.0f, 20.0f)] private float movementSpeed;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
+    [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
     [Space(10)]
 
     [Space(10)]
@@ -31,25 +33,34 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Transform cameraTarget;
     [SerializeField] public Transform cameraTransform;
     [SerializeField] public LayerMask itemLayerMask;
+    [SerializeField] public TextMeshProUGUI uiTargetItemText;
 
 
     [HideInInspector] public InputAction movementAction;
     [HideInInspector] public InputAction rotationAction;
     [HideInInspector] public InputAction clickAction;
+    [HideInInspector] public InputAction interractAction;
+    [HideInInspector] public InputAction dropAction;
 
 
     [HideInInspector] public Vector2 inputVector;
 
+    private Inventory _inventory;
+    private Item _focusItem;
 
     internal StateMachine stateMachine1 { get; private set; }
     internal StateMachine stateMachine2 { get; private set; }
 
     void Start()
     {
+        _inventory = new Inventory(10, 5);
+        _focusItem = null;
 
         movementAction = InputSystem.actions.FindAction("Movement");
         rotationAction = InputSystem.actions.FindAction("Rotation");
         clickAction = InputSystem.actions.FindAction("LMC");
+        interractAction = InputSystem.actions.FindAction("Interract");
+        dropAction = InputSystem.actions.FindAction("Drop");
 
 
         stateMachine1 = new StateMachine(new IState[] { new IdlePlayerState(this), 
@@ -69,6 +80,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         setInputVector();
+        updateFocusItem();
 
 
         stateMachine1.Update();
@@ -79,23 +91,11 @@ public class PlayerController : MonoBehaviour
 
         if (clickAction.WasPerformedThisFrame())
         {
-            GameObject gameObject = getFocusObject();
-            if (gameObject != null)
-            {
-                GameObject rootObject = gameObject.transform.root.gameObject;
-                Debug.Log(rootObject.name);
-                IItem rootObjectScript = rootObject.GetComponent<IItem>();
-                if (rootObjectScript != null)
-                {
-                    Item rootObjectItem = rootObjectScript.getItemObject();
-                    if (rootObjectItem != null)
-                    {
-                        Debug.Log(rootObjectItem.getName());
-                    }
-                }
-            }
+            
         }
 
+        if (interractAction.WasPerformedThisFrame()) processInterractAction();
+        if (dropAction.WasPerformedThisFrame()) processDropAction();
 
     }
     public bool isWASD() => inputVector.x != 0 || inputVector.y != 0;
@@ -126,10 +126,59 @@ public class PlayerController : MonoBehaviour
         if (!characterController.isGrounded) characterController.Move(new Vector3(0.0f, -1.0f, 0.0f) * 15.0f * Time.deltaTime);
         
     }
+    private void processInterractAction()
+    {
+        if (_focusItem != null)
+        {
+            if (_focusItem.State == ItemState.DROPPED)
+            {
+                if (_inventory.addItem(_focusItem))
+                {
+                    _focusItem.take();
+                }
+            }
+
+        } 
+    }
+    private void processDropAction()
+    {
+
+    }
+    private void updateFocusItem()
+    {
+        _focusItem = getFocusItem();
+        if (_focusItem == null)
+        {
+            uiTargetItemText.text = "";
+        }
+        else
+        {
+            uiTargetItemText.text = _focusItem.getName();
+        }
+    }
+    //get focus Item object
+    private Item getFocusItem()
+    {
+        GameObject gameObject = getFocusObject();
+        if (gameObject != null)
+        {
+            GameObject rootObject = gameObject.transform.root.gameObject;
+            IItem rootObjectScript = rootObject.GetComponent<IItem>();
+            if (rootObjectScript != null)
+            {
+                Item rootObjectItem = rootObjectScript.getItemObject();
+                if (rootObjectItem != null) return rootObjectItem;
+                else return null;
+            }
+            else return null;
+        }
+        else return null;
+    }
+    //get object by scope focus using interractDistance
     private GameObject getFocusObject()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 100.0f, itemLayerMask))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interractDistance, itemLayerMask))
             return hit.collider.gameObject;
         else
             return null;

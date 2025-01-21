@@ -1,4 +1,6 @@
 ﻿
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -6,14 +8,13 @@ namespace gameCore
 {
     internal class Inventory
     {
-        private static readonly int[] INVENTORY_SIZE = new[] { 6, 10 };
-
         private bool[,] _slots;
 
         public Inventory(int height, int width) 
         { 
             Size = new int[] { height, width };
             _slots = new bool[height, width];
+            Items = new List<Item>();
         }
         public bool addItem(Item item)
         {
@@ -54,14 +55,22 @@ namespace gameCore
         }
         private bool addToSlots(Item item)
         {
-            if (tryToAddToSlots(item)) return true;
+            if (tryToAddToSlots(item))
+            {
+                Items.Add(item);
+                return true;
+            }
             else if (item.getSize()[0] < 2 && item.getSize()[1] < 2)
                 return false;
             else
             {
                 item.rotateSize();
                 item.IsRotated = true;
-                if (tryToAddToSlots(item)) return true;
+                if (tryToAddToSlots(item))
+                {
+                    Items.Add(item);
+                    return true;
+                }
                 else
                 {
                     item.rotateSize();
@@ -126,6 +135,7 @@ namespace gameCore
 
         public IHoldable PrimarySlot { get; set; }
         public IHoldable SecondarySlot { get; set; }
+        public List<Item> Items { get; private set; }
         public int[] Size { get; private set; }
     }
 }
