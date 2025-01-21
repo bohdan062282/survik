@@ -8,6 +8,7 @@ using Unity.Cinemachine;
 using UnityEngine.UIElements;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.Rendering.BoolParameter;
+using UnityEngineInternal;
 
 
 public class PlayerController : MonoBehaviour
@@ -28,10 +29,13 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [SerializeField] public CharacterController characterController;
     [SerializeField] public Transform cameraTarget;
+    [SerializeField] public Transform cameraTransform;
+    [SerializeField] public LayerMask itemLayerMask;
 
 
     [HideInInspector] public InputAction movementAction;
     [HideInInspector] public InputAction rotationAction;
+    [HideInInspector] public InputAction clickAction;
 
 
     [HideInInspector] public Vector2 inputVector;
@@ -45,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
         movementAction = InputSystem.actions.FindAction("Movement");
         rotationAction = InputSystem.actions.FindAction("Rotation");
+        clickAction = InputSystem.actions.FindAction("LMC");
 
 
         stateMachine1 = new StateMachine(new IState[] { new IdlePlayerState(this), 
@@ -71,6 +76,25 @@ public class PlayerController : MonoBehaviour
 
         processRotation();
         processGravity();
+
+        if (clickAction.WasPerformedThisFrame())
+        {
+            GameObject gameObject = getFocusObject();
+            if (gameObject != null)
+            {
+                GameObject rootObject = gameObject.transform.root.gameObject;
+                Debug.Log(rootObject.name);
+                IItem rootObjectScript = rootObject.GetComponent<IItem>();
+                if (rootObjectScript != null)
+                {
+                    Item rootObjectItem = rootObjectScript.getItemObject();
+                    if (rootObjectItem != null)
+                    {
+                        Debug.Log(rootObjectItem.getName());
+                    }
+                }
+            }
+        }
 
 
     }
@@ -102,6 +126,15 @@ public class PlayerController : MonoBehaviour
         if (!characterController.isGrounded) characterController.Move(new Vector3(0.0f, -1.0f, 0.0f) * 15.0f * Time.deltaTime);
         
     }
+    private GameObject getFocusObject()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 100.0f, itemLayerMask))
+            return hit.collider.gameObject;
+        else
+            return null;
+    }
+
 
 
 }

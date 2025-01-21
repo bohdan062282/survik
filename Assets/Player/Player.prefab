@@ -412,6 +412,10 @@ MonoBehaviour:
   rotationSpeed: 10
   characterController: {fileID: 4833565646433117583}
   cameraTarget: {fileID: 3126818498147401177}
+  cameraTransform: {fileID: 4593075016360823292}
+  itemLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   movementAction:
     m_Name: 
     m_Type: 0
@@ -426,6 +430,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: b150c9ca-4dab-4f0a-87b0-b5197f39b7cd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  clickAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dd1190c6-ac6f-48e4-b12d-c307aa8254df
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
