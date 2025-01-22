@@ -11,7 +11,7 @@ namespace gameCore
     internal class Item
     {
         private string _name;
-        private int[] _size;
+        private Vector2Int _size;
         private GameObject _prefab;
         private GameObject _gameObject;
         public ItemState State { get; private set; }
@@ -20,7 +20,7 @@ namespace gameCore
         {
             _name = name;
             _prefab = prefab;
-            _size = new int[] { height, width };
+            _size = new Vector2Int(height, width);
             State = state;
         }
         public void Instantiate(Vector3 position)
@@ -34,14 +34,29 @@ namespace gameCore
             State = ItemState.ININVENTORY;
             _gameObject.SetActive(false);
         }
+        public void drop(Vector3 position, float Yrotation, Vector3 force)
+        {
+            State = ItemState.DROPPED;
+            _gameObject.SetActive(true);
+            _gameObject.transform.position = position;
+            _gameObject.transform.rotation = Quaternion.identity;
+            _gameObject.transform.Rotate(new Vector3(0.0f, Yrotation, 0.0f));
+            Rigidbody rb = _gameObject.GetComponent<Rigidbody>();
+            if (rb != null )
+            {
+                rb.AddForce(force, ForceMode.Impulse);
+            }
+            
+        }
         public void rotateSize()
         {
-            int temp = _size[0];
-            _size[0] = _size[1];
-            _size[1] = temp;
+            int temp = _size.x;
+            _size.x = _size.y;
+            _size.y = temp;
         }
         public string getName() { return _name; }
-        public int[] getSize() { return _size; }
+        public Vector2Int getSize() { return _size; }
+        public Vector2Int InventoryPosition { get; set; }
         public bool IsRotated { get; set; } = false;
         
     }

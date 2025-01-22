@@ -135,6 +135,11 @@ public class PlayerController : MonoBehaviour
                 if (_inventory.addItem(_focusItem))
                 {
                     _focusItem.take();
+                    Debug.Log(_focusItem.InventoryPosition.ToString());
+                }
+                else
+                {
+                    _focusItem.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
                 }
             }
 
@@ -142,7 +147,8 @@ public class PlayerController : MonoBehaviour
     }
     private void processDropAction()
     {
-
+        Item item = _inventory.dropFirstItem();
+        if (item != null) item.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
     }
     private void updateFocusItem()
     {

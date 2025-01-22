@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3126818498147401177}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7134883102287492378}
   - component: {fileID: 5273153890440037942}
   - component: {fileID: 2841885548678391432}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 494789918845276614}
   - component: {fileID: 8123877612075339845}
   - component: {fileID: 760096122517483091}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 4135320211981968850}
   - component: {fileID: 1476447571344999206}
   - component: {fileID: 9122461673815070651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 6740968993926302071}
   - component: {fileID: 4833565646433117583}
   - component: {fileID: 2505467371002424722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,6 +450,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: a1503d59-85fd-4a07-a68f-fdb6688d1b8e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  dropAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 45e800d6-aff1-407a-b281-e884e9afab03
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

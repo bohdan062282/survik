@@ -12,9 +12,28 @@ namespace gameCore
 
         public Inventory(int height, int width) 
         { 
-            Size = new int[] { height, width };
+            Size = new Vector2Int(height, width);
             _slots = new bool[height, width];
             Items = new List<Item>();
+        }
+        public Item dropFirstItem()
+        {
+            if (Items.Count > 0)
+            {
+                Item item = Items[0];
+
+                Items.RemoveAt(0);
+                setSlots(item.InventoryPosition.x, item.InventoryPosition.y, item.getSize().x, item.getSize().y, false);
+
+                if (item.IsRotated)
+                {
+                    item.rotateSize();
+                    item.IsRotated = false;
+                }
+                return item;
+            }
+            else return null;
+            
         }
         public bool addItem(Item item)
         {
@@ -60,7 +79,7 @@ namespace gameCore
                 Items.Add(item);
                 return true;
             }
-            else if (item.getSize()[0] < 2 && item.getSize()[1] < 2)
+            else if (item.getSize().x < 2 && item.getSize().y < 2)
                 return false;
             else
             {
@@ -82,15 +101,16 @@ namespace gameCore
         }
         private bool tryToAddToSlots(Item item)
         {
-            for (int i = 0; i < Size[0]; i++)
+            for (int i = 0; i < Size.x; i++)
             {
-                for (int j = 0; j < Size[1]; j++)
+                for (int j = 0; j < Size.y; j++)
                 {
-                    if (i + item.getSize()[0] > Size[0]) return false;
-                    if (j + item.getSize()[1] > Size[1]) j = Size[1];
-                    else if (checkSubslots(i, j, item.getSize()[0], item.getSize()[1]))
+                    if (i + item.getSize().x > Size.x) return false;
+                    if (j + item.getSize().y > Size.y) j = Size.y;
+                    else if (checkSubslots(i, j, item.getSize().x, item.getSize().y))
                     {
-                        setSlots(i, j, item.getSize()[0], item.getSize()[1]);
+                        setSlots(i, j, item.getSize().x, item.getSize().y, true);
+                        item.InventoryPosition = new Vector2Int(i, j);
                         return true;
                     }
                 }
@@ -108,22 +128,22 @@ namespace gameCore
             }
             return true;
         }
-        private void setSlots(int iStart, int jStart, int iSize, int jSize)
+        private void setSlots(int iStart, int jStart, int iSize, int jSize, bool flag)
         {
             for (int i = iStart; i < iStart + iSize; i++)
             {
                 for (int j = jStart; j < jStart + jSize; j++)
                 {
-                    _slots[i, j] = true;
+                    _slots[i, j] = flag;
                 }
             }
         }
         public void showInventory()
         {
             StringBuilder sb = new StringBuilder("");
-            for (int i = 0; i < Size[0]; i++)
+            for (int i = 0; i < Size.x; i++)
             {
-                for (int j = 0; j < Size[1]; j ++)
+                for (int j = 0; j < Size.y; j ++)
                 {
                     if (_slots[i, j] == true) sb.Append(1.ToString() + '\t');
                     else sb.Append(0.ToString() + '\t');
@@ -133,9 +153,10 @@ namespace gameCore
             Debug.Log(sb.ToString());
         }
 
+        public Item ActiveItem { get; set; }
         public IHoldable PrimarySlot { get; set; }
         public IHoldable SecondarySlot { get; set; }
         public List<Item> Items { get; private set; }
-        public int[] Size { get; private set; }
+        public Vector2Int Size { get; private set; }
     }
 }
