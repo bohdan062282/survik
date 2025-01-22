@@ -16,13 +16,13 @@ namespace gameCore
             _slots = new bool[height, width];
             Items = new List<Item>();
         }
-        public Item dropFirstItem()
+        public Item dropActiveItem()
         {
-            if (Items.Count > 0)
+            if (ActiveItem != null)
             {
-                Item item = Items[0];
+                Item item = ActiveItem;
 
-                Items.RemoveAt(0);
+                Items.Remove(item);
                 setSlots(item.InventoryPosition.x, item.InventoryPosition.y, item.getSize().x, item.getSize().y, false);
 
                 if (item.IsRotated)
@@ -30,6 +30,7 @@ namespace gameCore
                     item.rotateSize();
                     item.IsRotated = false;
                 }
+                ActiveItem = null;
                 return item;
             }
             else return null;

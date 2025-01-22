@@ -10,6 +10,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.Rendering.BoolParameter;
 using UnityEngineInternal;
 using TMPro;
+using System.Linq;
 
 
 public class PlayerController : MonoBehaviour
@@ -41,6 +42,12 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public InputAction clickAction;
     [HideInInspector] public InputAction interractAction;
     [HideInInspector] public InputAction dropAction;
+    //temp
+    [HideInInspector] public InputAction item3;
+    [HideInInspector] public InputAction item4;
+    [HideInInspector] public InputAction item5;
+    [HideInInspector] public InputAction item6;
+    [HideInInspector] public InputAction item7;
 
 
     [HideInInspector] public Vector2 inputVector;
@@ -61,6 +68,13 @@ public class PlayerController : MonoBehaviour
         clickAction = InputSystem.actions.FindAction("LMC");
         interractAction = InputSystem.actions.FindAction("Interract");
         dropAction = InputSystem.actions.FindAction("Drop");
+
+        //temp
+        item3 = InputSystem.actions.FindAction("Item3");
+        item4 = InputSystem.actions.FindAction("Item4");
+        item5 = InputSystem.actions.FindAction("Item5");
+        item6 = InputSystem.actions.FindAction("Item6");
+        item7 = InputSystem.actions.FindAction("Item7");
 
 
         stateMachine1 = new StateMachine(new IState[] { new IdlePlayerState(this), 
@@ -97,6 +111,12 @@ public class PlayerController : MonoBehaviour
         if (interractAction.WasPerformedThisFrame()) processInterractAction();
         if (dropAction.WasPerformedThisFrame()) processDropAction();
 
+        if (item3.WasPerformedThisFrame()) processSelectItemAction(0);
+        if (item4.WasPerformedThisFrame()) processSelectItemAction(1);
+        if (item5.WasPerformedThisFrame()) processSelectItemAction(2);
+        if (item6.WasPerformedThisFrame()) processSelectItemAction(3);
+        if (item7.WasPerformedThisFrame()) processSelectItemAction(4);
+
     }
     public bool isWASD() => inputVector.x != 0 || inputVector.y != 0;
     private void setInputVector()
@@ -126,6 +146,14 @@ public class PlayerController : MonoBehaviour
         if (!characterController.isGrounded) characterController.Move(new Vector3(0.0f, -1.0f, 0.0f) * 15.0f * Time.deltaTime);
         
     }
+    private void processSelectItemAction(int index)
+    {
+        if (_inventory.Items.Count < index + 1) _inventory.ActiveItem = null;
+        else
+        {
+            _inventory.ActiveItem = _inventory.Items[index];
+        }
+    }
     private void processInterractAction()
     {
         if (_focusItem != null)
@@ -147,7 +175,7 @@ public class PlayerController : MonoBehaviour
     }
     private void processDropAction()
     {
-        Item item = _inventory.dropFirstItem();
+        Item item = _inventory.dropActiveItem();
         if (item != null) item.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
     }
     private void updateFocusItem()
