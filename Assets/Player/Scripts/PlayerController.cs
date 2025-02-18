@@ -30,11 +30,11 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [Header("References")]
     [Space(10)]
+    [SerializeField] private UIScript _UIScript;
     [SerializeField] public CharacterController characterController;
     [SerializeField] public Transform cameraTarget;
     [SerializeField] public Transform cameraTransform;
     [SerializeField] public LayerMask itemLayerMask;
-    [SerializeField] public TextMeshProUGUI uiTargetItemText;
 
 
     [HideInInspector] public InputAction movementAction;
@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        _UIScript.Initialize();
+
         setInputVector();
         updateFocusItem();
 
@@ -183,11 +185,11 @@ public class PlayerController : MonoBehaviour
         _focusItem = getFocusItem();
         if (_focusItem == null)
         {
-            uiTargetItemText.text = "";
+            _UIScript.targetItemText.text = "";
         }
         else
         {
-            uiTargetItemText.text = _focusItem.getName();
+            _UIScript.targetItemText.text = _focusItem.getName();
         }
     }
     //get focus Item object
