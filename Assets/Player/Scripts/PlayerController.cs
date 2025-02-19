@@ -2,15 +2,6 @@
 using UnityEngine.InputSystem;
 using gameCore;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Cinemachine;
-using UnityEngine.UIElements;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.Rendering.BoolParameter;
-using UnityEngineInternal;
-using TMPro;
-using System.Linq;
 
 
 public class PlayerController : MonoBehaviour
@@ -54,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private Inventory _inventory;
     private Item _focusItem;
+    private int _selectedIndex;
 
     internal StateMachine stateMachine1 { get; private set; }
     internal StateMachine stateMachine2 { get; private set; }
@@ -150,6 +142,10 @@ public class PlayerController : MonoBehaviour
     }
     private void processSelectItemAction(int index)
     {
+        _selectedIndex = index;
+
+        _UIScript.setSelectedIcon(index);
+
         if (_inventory.Items.Count < index + 1) _inventory.ActiveItem = null;
         else
         {
@@ -165,7 +161,8 @@ public class PlayerController : MonoBehaviour
                 if (_inventory.addItem(_focusItem))
                 {
                     _focusItem.take();
-                    Debug.Log(_focusItem.InventoryPosition.ToString());
+
+                    _UIScript.updateToolbar(_inventory.Items);
                 }
                 else
                 {
@@ -177,8 +174,10 @@ public class PlayerController : MonoBehaviour
     }
     private void processDropAction()
     {
+        _UIScript.unSetSelectedIcon();
         Item item = _inventory.dropActiveItem();
         if (item != null) item.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
+        _UIScript.updateToolbar(_inventory.Items);
     }
     private void updateFocusItem()
     {

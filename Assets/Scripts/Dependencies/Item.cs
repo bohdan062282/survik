@@ -8,18 +8,20 @@ using UnityEngine;
 
 namespace gameCore
 {
-    internal class Item
+    public class Item
     {
         private string _name;
         private Vector2Int _size;
         private GameObject _prefab;
+        private Sprite _icon;
         private GameObject _gameObject;
         public ItemState State { get; private set; }
 
-        public Item(GameObject prefab, string name, int height, int width, ItemState state)
+        public Item(GameObject prefab, Sprite iconSprite, string name, int height, int width, ItemState state)
         {
             _name = name;
             _prefab = prefab;
+            _icon = iconSprite;
             _size = new Vector2Int(height, width);
             State = state;
         }
@@ -55,10 +57,11 @@ namespace gameCore
             _size.y = temp;
         }
         public string getName() { return _name; }
+        public Sprite getIcon() { return _icon; }
         public Vector2Int getSize() { return _size; }
         public Vector2Int InventoryPosition { get; set; }
         public bool IsRotated { get; set; } = false;
         
     }
-    internal enum ItemState { DROPPED, ININVENTORY, STAND };
+    public enum ItemState { DROPPED, ININVENTORY, STAND };
 }

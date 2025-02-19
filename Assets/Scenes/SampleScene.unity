@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2737b7b50108f7b4493dc3f6fa3d80c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 6b2db59b28ba69a4889c816a09dc46d3, type: 3}
 --- !u!4 &12846804
 Transform:
   m_ObjectHideFlags: 0
@@ -925,6 +926,10 @@ PrefabInstance:
     - target: {fileID: 8367798810440317822, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8563012258275556832, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
