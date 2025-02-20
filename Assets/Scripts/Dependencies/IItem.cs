@@ -6,5 +6,7 @@ namespace gameCore
     {
         public Item getItemObject();
         public void Initialize(Item itemObject);
+
+        //need to write drop() func for Inventory
     }
 }

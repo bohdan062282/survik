@@ -1,8 +1,10 @@
 using gameCore;
 using UnityEngine;
 
-internal class prek1scr : MonoBehaviour, IItem
+internal class prek1scr : MonoBehaviour, IItem, IPlaceble
 {
+    [SerializeField] private GameObject placingObject;
+
     private Item _item;
     void Start()
     {
