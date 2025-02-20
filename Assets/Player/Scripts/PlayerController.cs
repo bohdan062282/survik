@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Character skills settings")]
     [Space(10)]
     [SerializeField][Range(5.0f, 20.0f)] private float movementSpeed;
+    [SerializeField][Range(5.0f, 20.0f)] private float sprintSpeed;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
     [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
     [Space(10)]
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Transform cameraTarget;
     [SerializeField] public Transform cameraTransform;
     [SerializeField] public LayerMask itemLayerMask;
+    [SerializeField] private Transform PlacebleObjectTransform;
 
 
     [HideInInspector] public InputAction movementAction;
@@ -33,12 +35,17 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public InputAction clickAction;
     [HideInInspector] public InputAction interractAction;
     [HideInInspector] public InputAction dropAction;
+    [HideInInspector] public InputAction sprintAction;
+    [HideInInspector] public InputAction jumpAction;
     //temp
+    [HideInInspector] public InputAction item1;
+    [HideInInspector] public InputAction item2;
     [HideInInspector] public InputAction item3;
     [HideInInspector] public InputAction item4;
     [HideInInspector] public InputAction item5;
     [HideInInspector] public InputAction item6;
     [HideInInspector] public InputAction item7;
+    [HideInInspector] public InputAction item8;
 
 
     [HideInInspector] public Vector2 inputVector;
@@ -46,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private Inventory _inventory;
     private Item _focusItem;
     private int _selectedIndex;
+    private float _movementSpeed;
 
     internal StateMachine stateMachine1 { get; private set; }
     internal StateMachine stateMachine2 { get; private set; }
@@ -54,19 +62,25 @@ public class PlayerController : MonoBehaviour
     {
         _inventory = new Inventory(10, 5);
         _focusItem = null;
+        _movementSpeed = movementSpeed;
 
         movementAction = InputSystem.actions.FindAction("Movement");
         rotationAction = InputSystem.actions.FindAction("Rotation");
         clickAction = InputSystem.actions.FindAction("LMC");
         interractAction = InputSystem.actions.FindAction("Interract");
         dropAction = InputSystem.actions.FindAction("Drop");
+        sprintAction = InputSystem.actions.FindAction("Sprint");
+        jumpAction = InputSystem.actions.FindAction("Jump");
 
         //temp
+        item1 = InputSystem.actions.FindAction("Item1");
+        item2 = InputSystem.actions.FindAction("Item2");
         item3 = InputSystem.actions.FindAction("Item3");
         item4 = InputSystem.actions.FindAction("Item4");
         item5 = InputSystem.actions.FindAction("Item5");
         item6 = InputSystem.actions.FindAction("Item6");
         item7 = InputSystem.actions.FindAction("Item7");
+        item8 = InputSystem.actions.FindAction("Item8");
 
 
         stateMachine1 = new StateMachine(new IState[] { new IdlePlayerState(this), 
@@ -102,14 +116,21 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        if (interractAction.WasPerformedThisFrame()) processInterractAction();
-        if (dropAction.WasPerformedThisFrame()) processDropAction();
+        if (sprintAction.IsPressed()) _movementSpeed = sprintSpeed;
+        else _movementSpeed = movementSpeed;
 
-        if (item3.WasPerformedThisFrame()) processSelectItemAction(0);
-        if (item4.WasPerformedThisFrame()) processSelectItemAction(1);
-        if (item5.WasPerformedThisFrame()) processSelectItemAction(2);
-        if (item6.WasPerformedThisFrame()) processSelectItemAction(3);
-        if (item7.WasPerformedThisFrame()) processSelectItemAction(4);
+        if (jumpAction.WasPerformedThisFrame() && characterController.isGrounded) characterController.Move(new Vector3(0.0f, 3.0f, 0.0f));
+
+        if (interractAction.WasPerformedThisFrame()) processInterractAction();
+        else if (dropAction.WasPerformedThisFrame()) processDropAction();
+        else if (item1.WasPerformedThisFrame()) processSelectItemAction(0);
+        else if (item2.WasPerformedThisFrame()) processSelectItemAction(1);
+        else if (item3.WasPerformedThisFrame()) processSelectItemAction(2);
+        else if (item4.WasPerformedThisFrame()) processSelectItemAction(3);
+        else if (item5.WasPerformedThisFrame()) processSelectItemAction(4);
+        else if (item6.WasPerformedThisFrame()) processSelectItemAction(5);
+        else if (item7.WasPerformedThisFrame()) processSelectItemAction(6);
+        else if (item8.WasPerformedThisFrame()) processSelectItemAction(7);
 
     }
     public bool isWASD() => inputVector.x != 0 || inputVector.y != 0;
@@ -122,8 +143,8 @@ public class PlayerController : MonoBehaviour
     //Mozhe perepisat pokruche!!
     public void processMovement()
     {
-        characterController.Move(   (transform.forward * inputVector.y * Time.deltaTime * movementSpeed) + 
-                                    (transform.right * inputVector.x * Time.deltaTime * movementSpeed)      );
+        characterController.Move(   (transform.forward * inputVector.y * Time.deltaTime * _movementSpeed) + 
+                                    (transform.right * inputVector.x * Time.deltaTime * _movementSpeed)      );
 
     }
     public void processRotation()
@@ -137,7 +158,7 @@ public class PlayerController : MonoBehaviour
     private void processGravity()
     {
         
-        if (!characterController.isGrounded) characterController.Move(new Vector3(0.0f, -1.0f, 0.0f) * 15.0f * Time.deltaTime);
+        if (!characterController.isGrounded) characterController.Move(new Vector3(0.0f, -1.0f, 0.0f) * 10.0f * Time.deltaTime);
         
     }
     private void processSelectItemAction(int index)

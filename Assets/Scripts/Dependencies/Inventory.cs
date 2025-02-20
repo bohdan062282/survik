@@ -38,43 +38,6 @@ namespace gameCore
         }
         public bool addItem(Item item)
         {
-            if (item is IHoldable)
-            {
-                IHoldable holdableItem = (IHoldable)item;
-                bool emptyPrimary = PrimarySlot == null;
-                bool emptySecondary = SecondarySlot == null;
-
-                if (holdableItem.IsPrimary)
-                {
-                    if (emptyPrimary)
-                    {
-                        PrimarySlot = holdableItem;
-                        return true;
-                    }
-                    else return addToSlots(item);
-                }
-                else
-                {
-                    if (emptySecondary)
-                    {
-                        SecondarySlot = holdableItem;
-                        return true;
-                    }                       
-                    else if (emptyPrimary)
-                    {
-                        PrimarySlot = holdableItem;
-                        return true;
-                    }
-                    else return addToSlots(item);
-                }
-            }
-            else
-            {
-                return addToSlots(item);
-            }
-        }
-        private bool addToSlots(Item item)
-        {
             if (tryToAddToSlots(item))
             {
                 Items.Add(item);
@@ -155,8 +118,6 @@ namespace gameCore
         }
 
         public Item ActiveItem { get; set; }
-        public IHoldable PrimarySlot { get; set; }
-        public IHoldable SecondarySlot { get; set; }
         public List<Item> Items { get; private set; }
         public Vector2Int Size { get; private set; }
     }
