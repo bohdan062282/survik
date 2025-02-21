@@ -177,18 +177,15 @@ public class PlayerController : MonoBehaviour
     {
         if (_focusItem != null)
         {
-            if (_focusItem.State == ItemState.DROPPED)
+            if (_inventory.addItem(_focusItem))
             {
-                if (_inventory.addItem(_focusItem))
-                {
-                    _focusItem.take();
+                _focusItem.take();
 
-                    _UIScript.updateToolbar(_inventory.Items);
-                }
-                else
-                {
-                    _focusItem.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
-                }
+                _UIScript.updateToolbar(_inventory.Items);
+            }
+            else
+            {
+                _focusItem.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
             }
 
         } 

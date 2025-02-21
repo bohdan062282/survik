@@ -15,30 +15,26 @@ namespace gameCore
         private GameObject _prefab;
         private Sprite _icon;
         private GameObject _gameObject;
-        public ItemState State { get; private set; }
 
-        public Item(GameObject prefab, Sprite iconSprite, string name, int height, int width, ItemState state)
+        public Item(GameObject prefab, Sprite iconSprite, string name, int height, int width)
         {
             _name = name;
             _prefab = prefab;
             _icon = iconSprite;
             _size = new Vector2Int(height, width);
-            State = state;
         }
-        public void Instantiate(Vector3 position)
+        public virtual void Instantiate(Vector3 position)
         {
             _gameObject = UnityEngine.Object.Instantiate(_prefab, position, Quaternion.identity);
             _gameObject.GetComponent<IItem>().Initialize(this);
 
         }
-        public void take()
+        public virtual void take()
         {
-            State = ItemState.ININVENTORY;
             _gameObject.SetActive(false);
         }
         public void drop(Vector3 position, float Yrotation, Vector3 force)
         {
-            State = ItemState.DROPPED;
             _gameObject.SetActive(true);
             _gameObject.transform.position = position;
             _gameObject.transform.rotation = Quaternion.identity;
