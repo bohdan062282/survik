@@ -7,8 +7,10 @@ public class testScr : MonoBehaviour
 
     void Start()
     {
-        Item item1 = new Item(  Resources.Load<GameObject>("Items/Prek1/Prek1Dropped"),
-                                Resources.Load<Sprite>("Items/Prek1/Prek1Texture"), "Prekos1", 4, 3);
+        Item item1 = new StandingItem(  Resources.Load<GameObject>("Items/Prek1/Prek1Dropped"),
+                                        Resources.Load<Sprite>("Items/Prek1/Prek1Texture"), "Prekos1", 4, 3,
+                                        Resources.Load<GameObject>("Items/Prek1/Prek1Placing"),
+                                        Resources.Load<GameObject>("Items/Prek1/Prek1Placing"));
         Item item2 = new Item(  Resources.Load<GameObject>("Items/Prek1/Prek1Dropped"),
                                 Resources.Load<Sprite>("Items/Prek1/Prek1Texture"), "Prekos2", 4, 3);
         Item item3 = new Item(  Resources.Load<GameObject>("Items/Prek1/Prek1Dropped"), 

@@ -20,13 +20,31 @@ public class StandingItem : Item
         base.Instantiate(position);
         _placebleObject = UnityEngine.GameObject.Instantiate(_placebleObjectPrefab);
         _placebleObject.SetActive(false);
-        _standingObject = UnityEngine.GameObject.Instantiate(_standingObject);
+        _standingObject = UnityEngine.GameObject.Instantiate(_standingObjectPrefab);
         _standingObject.SetActive(false);
 
     }
-    public override void take()
+    public override void take(PlayerController playerController)
     {
-        base.take();
+        base.take(playerController);
+
+        IPlaceble placebleScr = _placebleObject.GetComponent<IPlaceble>();
+        if (placebleScr != null) placebleScr.setPlacingObjPosTransform(playerController);
+
+    }
+    public override Item select()
+    {
+        base.select();
+
+        _placebleObject.SetActive(true);
+
+        return this;
+    }
+    public override void unSelect()
+    {
+        base.unSelect();
+
+        _placebleObject.SetActive(false);
     }
 
 }

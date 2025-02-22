@@ -14,7 +14,8 @@ namespace gameCore
         private Vector2Int _size;
         private GameObject _prefab;
         private Sprite _icon;
-        private GameObject _gameObject;
+        private GameObject _droppedGameObject;
+        protected PlayerController _playerController;
 
         public Item(GameObject prefab, Sprite iconSprite, string name, int height, int width)
         {
@@ -25,26 +26,37 @@ namespace gameCore
         }
         public virtual void Instantiate(Vector3 position)
         {
-            _gameObject = UnityEngine.Object.Instantiate(_prefab, position, Quaternion.identity);
-            _gameObject.GetComponent<IItem>().Initialize(this);
+            _droppedGameObject = UnityEngine.Object.Instantiate(_prefab, position, Quaternion.identity);
+            _droppedGameObject.GetComponent<IItem>().Initialize(this);
 
         }
-        public virtual void take()
+        public virtual void take(PlayerController playerController)
         {
-            _gameObject.SetActive(false);
+            _droppedGameObject.SetActive(false);
+
+            _playerController = playerController;
         }
         public void drop(Vector3 position, float Yrotation, Vector3 force)
         {
-            _gameObject.SetActive(true);
-            _gameObject.transform.position = position;
-            _gameObject.transform.rotation = Quaternion.identity;
-            _gameObject.transform.Rotate(new Vector3(0.0f, Yrotation, 0.0f));
-            Rigidbody rb = _gameObject.GetComponent<Rigidbody>();
+            _droppedGameObject.SetActive(true);
+            _droppedGameObject.transform.position = position;
+            _droppedGameObject.transform.rotation = Quaternion.identity;
+            _droppedGameObject.transform.Rotate(new Vector3(0.0f, Yrotation, 0.0f));
+            Rigidbody rb = _droppedGameObject.GetComponent<Rigidbody>();
             if (rb != null )
             {
                 rb.AddForce(force, ForceMode.Impulse);
             }
             
+        }
+        public virtual Item select()
+        {
+
+            return this;
+        }
+        public virtual void unSelect()
+        {
+
         }
         public void rotateSize()
         {

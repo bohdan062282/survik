@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Transform cameraTarget;
     [SerializeField] public Transform cameraTransform;
     [SerializeField] public LayerMask itemLayerMask;
-    [SerializeField] private Transform PlacebleObjectTransform;
+    [SerializeField] public Transform PlacebleObjectTransform;
 
 
     [HideInInspector] public InputAction movementAction;
@@ -163,15 +163,14 @@ public class PlayerController : MonoBehaviour
     }
     private void processSelectItemAction(int index)
     {
+        _inventory.unSelectItem();
+
         _selectedIndex = index;
 
         _UIScript.setSelectedIcon(index);
 
-        if (_inventory.Items.Count < index + 1) _inventory.ActiveItem = null;
-        else
-        {
-            _inventory.ActiveItem = _inventory.Items[index];
-        }
+        _inventory.selectItem(index, PlacebleObjectTransform);
+
     }
     private void processInterractAction()
     {
@@ -179,7 +178,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_inventory.addItem(_focusItem))
             {
-                _focusItem.take();
+                _focusItem.take(this);
 
                 _UIScript.updateToolbar(_inventory.Items);
             }
