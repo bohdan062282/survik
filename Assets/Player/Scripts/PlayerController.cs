@@ -192,8 +192,16 @@ public class PlayerController : MonoBehaviour
     private void processDropAction()
     {
         _UIScript.unSetSelectedIcon();
+
+
+
         Item item = _inventory.dropActiveItem();
-        if (item != null) item.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
+        if (item != null)
+        {
+            item.unSelect();
+            item.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
+        }
+
         _UIScript.updateToolbar(_inventory.Items);
     }
     private void updateFocusItem()

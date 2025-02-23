@@ -39,14 +39,13 @@ namespace gameCore
         public void drop(Vector3 position, float Yrotation, Vector3 force)
         {
             _droppedGameObject.SetActive(true);
+
             _droppedGameObject.transform.position = position;
             _droppedGameObject.transform.rotation = Quaternion.identity;
             _droppedGameObject.transform.Rotate(new Vector3(0.0f, Yrotation, 0.0f));
+
             Rigidbody rb = _droppedGameObject.GetComponent<Rigidbody>();
-            if (rb != null )
-            {
-                rb.AddForce(force, ForceMode.Impulse);
-            }
+            if (rb != null ) rb.AddForce(force, ForceMode.Impulse);
             
         }
         public virtual Item select()
