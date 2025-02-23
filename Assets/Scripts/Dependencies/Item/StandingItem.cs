@@ -7,13 +7,16 @@ public class StandingItem : Item
     private GameObject _placebleObject;
     private GameObject _standingObjectPrefab;
     private GameObject _standingObject;
+    private GameObject _ghostObjectPrefab;
+    private GameObject _ghostObject;
 
     public StandingItem(GameObject prefab, Sprite iconSprite, string name, int height, int width, 
-                        GameObject placebleObjectPrefab, GameObject standingObjectPrefab)
+                        GameObject placebleObjectPrefab, GameObject standingObjectPrefab, GameObject ghostObjectPrefab)
             : base(prefab, iconSprite, name, height, width)
     {
         _placebleObjectPrefab = placebleObjectPrefab;
         _standingObjectPrefab = standingObjectPrefab;
+        _ghostObjectPrefab = ghostObjectPrefab;
     }
     public override void Instantiate(Vector3 position)
     {
@@ -22,14 +25,18 @@ public class StandingItem : Item
         _placebleObject.SetActive(false);
         _standingObject = UnityEngine.GameObject.Instantiate(_standingObjectPrefab);
         _standingObject.SetActive(false);
+        _ghostObject = UnityEngine.GameObject.Instantiate(_ghostObjectPrefab);
+        _ghostObject.SetActive(false);
 
     }
     public override void take(PlayerController playerController)
     {
         base.take(playerController);
 
-        IPlaceble placebleScr = _placebleObject.GetComponent<IPlaceble>();
-        if (placebleScr != null) placebleScr.setPlacingObjPosTransform(playerController);
+        IPlaceble placebleScr1 = _placebleObject.GetComponent<IPlaceble>();
+        if (placebleScr1 != null) placebleScr1.setPlacingObjPosTransform(playerController);
+        IPlaceble placebleScr2 = _ghostObject.GetComponent<IPlaceble>();
+        if (placebleScr2 != null) placebleScr2.setPlacingObjPosTransform(playerController);
 
     }
     public override Item select()
@@ -37,6 +44,7 @@ public class StandingItem : Item
         base.select();
 
         _placebleObject.SetActive(true);
+        _ghostObject.SetActive(true);
 
         return this;
     }
@@ -45,6 +53,7 @@ public class StandingItem : Item
         base.unSelect();
 
         _placebleObject.SetActive(false);
+        _ghostObject.SetActive(false);
     }
 
 }
