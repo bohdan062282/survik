@@ -22,6 +22,7 @@ public class Prek1PlacingScript : MonoBehaviour, IPlaceble
         if (_playerController != null)
         {
             transform.position = _playerController.PlacebleObjectTransform.position;
+            transform.rotation = _playerController.PlacebleObjectTransform.rotation;
         }
     }
     public void setPlacingObjPosTransform(PlayerController playerController)

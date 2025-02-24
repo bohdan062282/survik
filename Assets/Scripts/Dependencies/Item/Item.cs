@@ -57,6 +57,10 @@ namespace gameCore
         {
 
         }
+        public virtual void interract()
+        {
+
+        }
         public void rotateSize()
         {
             int temp = _size.x;

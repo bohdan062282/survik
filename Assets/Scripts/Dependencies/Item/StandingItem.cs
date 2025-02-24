@@ -21,10 +21,14 @@ public class StandingItem : Item
     public override void Instantiate(Vector3 position)
     {
         base.Instantiate(position);
+
         _placebleObject = UnityEngine.GameObject.Instantiate(_placebleObjectPrefab);
         _placebleObject.SetActive(false);
+
         _standingObject = UnityEngine.GameObject.Instantiate(_standingObjectPrefab);
+        _standingObject.GetComponent<IItem>().Initialize(this);
         _standingObject.SetActive(false);
+
         _ghostObject = UnityEngine.GameObject.Instantiate(_ghostObjectPrefab);
         _ghostObject.SetActive(false);
 
@@ -54,6 +58,18 @@ public class StandingItem : Item
 
         _placebleObject.SetActive(false);
         _ghostObject.SetActive(false);
+    }
+    public override void interract()
+    {
+        base.interract();
+
+        _standingObject.SetActive(true);
+        
+        (Vector3, Vector3) transformParam = _playerController.getPlaceblePosition();
+
+        _standingObject.transform.position = transformParam.Item1;
+        _standingObject.transform.up = transformParam.Item2;
+
     }
 
 }

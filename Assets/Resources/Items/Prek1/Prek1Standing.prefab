@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5555571055143665760}
-  - component: {fileID: 8212920288122180738}
-  - component: {fileID: -3532325779318192154}
+  - component: {fileID: 2825606203944546867}
   m_Layer: 9
   m_Name: Prek1Standing
   m_TagString: Untagged
@@ -35,34 +34,7 @@ Transform:
   - {fileID: 8999370528314258784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &8212920288122180738
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6179173749932076958}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &-3532325779318192154
+--- !u!114 &2825606203944546867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,10 +43,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6179173749932076958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36ad994c01367174ea95adb239f53a50, type: 3}
+  m_Script: {fileID: 11500000, guid: 38c4815bd4cc03d41b91265b4d464cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placingObject: {fileID: 0}
 --- !u!1 &6290194241810135173
 GameObject:
   m_ObjectHideFlags: 0

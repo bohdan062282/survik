@@ -21,8 +21,10 @@ public class Prek1GhostScript : MonoBehaviour, IPlaceble
     {
         if (_playerController != null)
         {
-            transform.position = _playerController.PlacebleObjectTransform.position + (_playerController.transform.forward * 3.0f);
-            Debug.Log(_playerController.transform.forward);
+            (Vector3, Vector3) transformParam = _playerController.getPlaceblePosition();
+
+            transform.position = transformParam.Item1;
+            transform.up = transformParam.Item2;
         }
     }
     public void setPlacingObjPosTransform(PlayerController playerController)

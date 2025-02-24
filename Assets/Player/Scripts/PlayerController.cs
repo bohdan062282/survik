@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Transform cameraTransform;
     [SerializeField] public LayerMask itemLayerMask;
     [SerializeField] public Transform PlacebleObjectTransform;
+    [SerializeField] private LayerMask groundLayerMask;
 
 
     [HideInInspector] public InputAction movementAction;
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
         _focusItem = null;
         _movementSpeed = movementSpeed;
 
+        _UIScript.Initialize();
+
         movementAction = InputSystem.actions.FindAction("Movement");
         rotationAction = InputSystem.actions.FindAction("Rotation");
         clickAction = InputSystem.actions.FindAction("LMC");
@@ -99,7 +102,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        _UIScript.Initialize();
 
         setInputVector();
         updateFocusItem();
@@ -122,6 +124,7 @@ public class PlayerController : MonoBehaviour
         if (jumpAction.WasPerformedThisFrame() && characterController.isGrounded) characterController.Move(new Vector3(0.0f, 3.0f, 0.0f));
 
         if (interractAction.WasPerformedThisFrame()) processInterractAction();
+        if (clickAction.WasPerformedThisFrame()) processItemInterractAction();
         else if (dropAction.WasPerformedThisFrame()) processDropAction();
         else if (item1.WasPerformedThisFrame()) processSelectItemAction(0);
         else if (item2.WasPerformedThisFrame()) processSelectItemAction(1);
@@ -189,6 +192,25 @@ public class PlayerController : MonoBehaviour
 
         } 
     }
+    private void processItemInterractAction()
+    {
+        if ( _inventory.ActiveItem != null)
+        {
+            if (_inventory.ActiveItem is StandingItem)
+            {
+                Item item = _inventory.dropActiveItem();
+                if (item != null)
+                {
+                    _UIScript.unSetSelectedIcon();
+                    item.unSelect();
+                    item.interract();
+
+                    _UIScript.updateToolbar(_inventory.Items);
+
+                }
+            }
+        }
+    }
     private void processDropAction()
     {
         _UIScript.unSetSelectedIcon();
@@ -219,9 +241,10 @@ public class PlayerController : MonoBehaviour
     //get focus Item object
     private Item getFocusItem()
     {
-        GameObject gameObject = getFocusObject();
+        GameObject gameObject = getFocusItemObject();
         if (gameObject != null)
         {
+            if (clickAction.WasPerformedThisFrame()) Debug.Log(gameObject.name);
             GameObject rootObject = gameObject.transform.root.gameObject;
             IItem rootObjectScript = rootObject.GetComponent<IItem>();
             if (rootObjectScript != null)
@@ -235,13 +258,20 @@ public class PlayerController : MonoBehaviour
         else return null;
     }
     //get object by scope focus using interractDistance
-    private GameObject getFocusObject()
+    private GameObject getFocusItemObject()
     {
         RaycastHit hit;
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interractDistance, itemLayerMask))
             return hit.collider.gameObject;
         else
             return null;
+    }
+    public (Vector3, Vector3) getPlaceblePosition()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interractDistance, groundLayerMask))
+            return (hit.point, hit.normal);
+        else return (cameraTransform.position + (cameraTransform.forward * interractDistance), PlacebleObjectTransform.up);
     }
 
 

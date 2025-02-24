@@ -1851,7 +1851,7 @@ Transform:
   m_GameObject: {fileID: 8354942093850077030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.29, z: 1.24}
+  m_LocalPosition: {x: 0, y: 0.21, z: 0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1955,6 +1955,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   PlacebleObjectTransform: {fileID: 5046680105772233795}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
   movementAction:
     m_Name: 
     m_Type: 0
