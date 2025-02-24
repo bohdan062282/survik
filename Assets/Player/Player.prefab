@@ -1937,6 +1937,7 @@ MonoBehaviour:
   sprintSpeed: 10
   rotationSpeed: 10
   interractDistance: 6
+  droppedOutlineColor: {r: 1, g: 0.89896685, b: 0.20188677, a: 0}
   _UIScript:
     targetItemText: {fileID: 5954324824751826305}
     item1Icon: {fileID: 7571589281126039820}

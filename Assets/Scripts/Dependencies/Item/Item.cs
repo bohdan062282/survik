@@ -28,7 +28,27 @@ namespace gameCore
         {
             _droppedGameObject = UnityEngine.Object.Instantiate(_prefab, position, Quaternion.identity);
             _droppedGameObject.GetComponent<IItem>().Initialize(this);
+            Outline outlineScr = _droppedGameObject.GetComponent<Outline>();
+            if (outlineScr != null) outlineScr.enabled = false;
+        }
+        public void onFocusEnter(UnityEngine.Color color)
+        {
+            Outline outlineScr = _droppedGameObject.GetComponent<Outline>();
 
+            if (outlineScr != null)
+            {
+                outlineScr.enabled = true;
+                outlineScr.OutlineColor = color;
+            }
+        }
+        public void onFocusExit()
+        {
+            Outline outlineScr = _droppedGameObject.GetComponent<Outline>();
+
+            if (outlineScr != null)
+            {
+                outlineScr.enabled = false;
+            }
         }
         public virtual void take(PlayerController playerController)
         {

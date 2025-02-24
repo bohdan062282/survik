@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(5.0f, 20.0f)] private float sprintSpeed;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
     [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
+    [SerializeField] private Color droppedOutlineColor;
     [Space(10)]
 
     [Space(10)]
@@ -228,14 +229,26 @@ public class PlayerController : MonoBehaviour
     }
     private void updateFocusItem()
     {
-        _focusItem = getFocusItem();
-        if (_focusItem == null)
+        Item newFocusItem;
+        newFocusItem = getFocusItem();
+
+        if (newFocusItem == null)
         {
+            if (_focusItem != null)
+            {
+                _focusItem.onFocusExit();
+                _focusItem = null;
+            }
             _UIScript.targetItemText.text = "";
         }
         else
         {
-            _UIScript.targetItemText.text = _focusItem.getName();
+            if (_focusItem != newFocusItem)
+            {
+                _UIScript.targetItemText.text = newFocusItem.getName();
+                newFocusItem.onFocusEnter(droppedOutlineColor);
+                _focusItem = newFocusItem;
+            }
         }
     }
     //get focus Item object
