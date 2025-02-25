@@ -3,6 +3,8 @@ using gameCore;
 
 public class StandingItem : Item
 {
+    public static UnityEngine.Color standingOutlineColor = UnityEngine.Color.green;
+
     private GameObject _placebleObjectPrefab;
     private GameObject _placebleObject;
     private GameObject _standingObjectPrefab;
@@ -31,6 +33,9 @@ public class StandingItem : Item
 
         _ghostObject = UnityEngine.GameObject.Instantiate(_ghostObjectPrefab);
         _ghostObject.SetActive(false);
+
+        Outline outlineScr = _standingObject.GetComponent<Outline>();
+        if (outlineScr != null) outlineScr.enabled = false;
 
     }
     public override void take(PlayerController playerController)
@@ -70,6 +75,34 @@ public class StandingItem : Item
         _standingObject.transform.position = transformParam.Item1;
         _standingObject.transform.up = transformParam.Item2;
 
+    }
+    public override void onFocusEnter()
+    {
+        if (_standingObject.active)
+        {
+            Outline outlineScr = _standingObject.GetComponent<Outline>();
+
+            if (outlineScr != null)
+            {
+                outlineScr.enabled = true;
+                outlineScr.OutlineColor = standingOutlineColor;
+            }
+        }
+        else base.onFocusEnter();
+        
+    }
+    public override void onFocusExit()
+    {
+        if (_standingObject.active)
+        {
+            Outline outlineScr = _standingObject.GetComponent<Outline>();
+
+            if (outlineScr != null)
+            {
+                outlineScr.enabled = false;
+            }
+        }
+        else base.onFocusExit();
     }
 
 }

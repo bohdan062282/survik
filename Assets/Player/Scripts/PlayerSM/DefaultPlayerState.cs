@@ -20,6 +20,7 @@ namespace gameCore
         {
 
             if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInterractAction();
+
             if (PlayerActions.clickAction.WasPerformedThisFrame()) _player.processItemInterractAction();
             else if (PlayerActions.dropAction.WasPerformedThisFrame()) _player.processDropAction();
             else if (PlayerActions.item1.WasPerformedThisFrame()) _player.processSelectItemAction(0);

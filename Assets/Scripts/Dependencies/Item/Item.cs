@@ -10,6 +10,8 @@ namespace gameCore
 {
     public class Item
     {
+        public static UnityEngine.Color droppedOutlineColor = UnityEngine.Color.yellow;
+
         private string _name;
         private Vector2Int _size;
         private GameObject _prefab;
@@ -31,17 +33,17 @@ namespace gameCore
             Outline outlineScr = _droppedGameObject.GetComponent<Outline>();
             if (outlineScr != null) outlineScr.enabled = false;
         }
-        public void onFocusEnter(UnityEngine.Color color)
+        public virtual void onFocusEnter()
         {
             Outline outlineScr = _droppedGameObject.GetComponent<Outline>();
 
             if (outlineScr != null)
             {
                 outlineScr.enabled = true;
-                outlineScr.OutlineColor = color;
+                outlineScr.OutlineColor = droppedOutlineColor;
             }
         }
-        public void onFocusExit()
+        public virtual void onFocusExit()
         {
             Outline outlineScr = _droppedGameObject.GetComponent<Outline>();
 

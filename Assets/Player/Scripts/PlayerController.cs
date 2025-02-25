@@ -166,8 +166,6 @@ public class PlayerController : MonoBehaviour
     {
         _UIScript.unSetSelectedIcon();
 
-
-
         Item item = _inventory.dropActiveItem();
         if (item != null)
         {
@@ -196,7 +194,7 @@ public class PlayerController : MonoBehaviour
             if (_focusItem != newFocusItem)
             {
                 _UIScript.targetItemText.text = newFocusItem.getName();
-                newFocusItem.onFocusEnter(droppedOutlineColor);
+                newFocusItem.onFocusEnter();
                 _focusItem = newFocusItem;
             }
         }
@@ -207,7 +205,6 @@ public class PlayerController : MonoBehaviour
         GameObject gameObject = getFocusItemObject();
         if (gameObject != null)
         {
-            if (PlayerActions.clickAction.WasPerformedThisFrame()) Debug.Log(gameObject.name);
             GameObject rootObject = gameObject.transform.root.gameObject;
             IItem rootObjectScript = rootObject.GetComponent<IItem>();
             if (rootObjectScript != null)

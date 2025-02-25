@@ -7,6 +7,9 @@ public class testScr : MonoBehaviour
 
     void Start()
     {
+        Item.droppedOutlineColor = UnityEngine.Color.magenta;
+        StandingItem.standingOutlineColor = UnityEngine.Color.white;
+
         Item item1 = new StandingItem(  Resources.Load<GameObject>("Items/Prek1/Prek1Dropped"),
                                         Resources.Load<Sprite>("Items/Prek1/Prek1Texture"), "Prekos1", 4, 3,
                                         Resources.Load<GameObject>("Items/Prek1/Prek1Placing"),
