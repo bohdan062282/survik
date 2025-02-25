@@ -31,30 +31,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Transform PlacebleObjectTransform;
     [SerializeField] private LayerMask groundLayerMask;
 
-
-    [HideInInspector] public InputAction movementAction;
-    [HideInInspector] public InputAction rotationAction;
-    [HideInInspector] public InputAction clickAction;
-    [HideInInspector] public InputAction interractAction;
-    [HideInInspector] public InputAction dropAction;
-    [HideInInspector] public InputAction sprintAction;
-    [HideInInspector] public InputAction jumpAction;
     //temp
-    [HideInInspector] public InputAction item1;
-    [HideInInspector] public InputAction item2;
-    [HideInInspector] public InputAction item3;
-    [HideInInspector] public InputAction item4;
-    [HideInInspector] public InputAction item5;
-    [HideInInspector] public InputAction item6;
-    [HideInInspector] public InputAction item7;
-    [HideInInspector] public InputAction item8;
 
 
     [HideInInspector] public Vector2 inputVector;
 
     private Inventory _inventory;
     private Item _focusItem;
-    private int _selectedIndex;
     private float _movementSpeed;
 
     internal StateMachine stateMachine1 { get; private set; }
@@ -68,35 +51,18 @@ public class PlayerController : MonoBehaviour
 
         _UIScript.Initialize();
 
-        movementAction = InputSystem.actions.FindAction("Movement");
-        rotationAction = InputSystem.actions.FindAction("Rotation");
-        clickAction = InputSystem.actions.FindAction("LMC");
-        interractAction = InputSystem.actions.FindAction("Interract");
-        dropAction = InputSystem.actions.FindAction("Drop");
-        sprintAction = InputSystem.actions.FindAction("Sprint");
-        jumpAction = InputSystem.actions.FindAction("Jump");
-
-        //temp
-        item1 = InputSystem.actions.FindAction("Item1");
-        item2 = InputSystem.actions.FindAction("Item2");
-        item3 = InputSystem.actions.FindAction("Item3");
-        item4 = InputSystem.actions.FindAction("Item4");
-        item5 = InputSystem.actions.FindAction("Item5");
-        item6 = InputSystem.actions.FindAction("Item6");
-        item7 = InputSystem.actions.FindAction("Item7");
-        item8 = InputSystem.actions.FindAction("Item8");
-
 
         stateMachine1 = new StateMachine(new IState[] { new IdlePlayerState(this), 
                                                         new RunPlayerState(this),
                                                                                     });
 
-        //stateMachine2 = new StateMachine(new IState[] { new DefaultPlayerState(this), });
+        stateMachine2 = new StateMachine(new IState[] { new DefaultPlayerState(this),
+                                                        new PlacingPlayerState(this)});
 
 
 
-        stateMachine1.Initialize(stateMachine1.States[StateType.IdlePlayerState]);
-        //stateMachine1.Initialize(stateMachine1.States[StateType.DefaultPlayerState]);
+        stateMachine1.Initialize(stateMachine1.States[StateType.IdleState]);
+        stateMachine2.Initialize(stateMachine2.States[StateType.DefaultState]);
 
 
     }
@@ -109,38 +75,24 @@ public class PlayerController : MonoBehaviour
 
 
         stateMachine1.Update();
-        //stateMachine2.Update();
+        stateMachine2.Update();
 
         processRotation();
         processGravity();
 
-        if (clickAction.WasPerformedThisFrame())
-        {
-            
-        }
 
-        if (sprintAction.IsPressed()) _movementSpeed = sprintSpeed;
+        if (PlayerActions.sprintAction.IsPressed()) _movementSpeed = sprintSpeed;
         else _movementSpeed = movementSpeed;
 
-        if (jumpAction.WasPerformedThisFrame() && characterController.isGrounded) characterController.Move(new Vector3(0.0f, 3.0f, 0.0f));
+        if (PlayerActions.jumpAction.WasPerformedThisFrame() && characterController.isGrounded) characterController.Move(new Vector3(0.0f, 3.0f, 0.0f));
 
-        if (interractAction.WasPerformedThisFrame()) processInterractAction();
-        if (clickAction.WasPerformedThisFrame()) processItemInterractAction();
-        else if (dropAction.WasPerformedThisFrame()) processDropAction();
-        else if (item1.WasPerformedThisFrame()) processSelectItemAction(0);
-        else if (item2.WasPerformedThisFrame()) processSelectItemAction(1);
-        else if (item3.WasPerformedThisFrame()) processSelectItemAction(2);
-        else if (item4.WasPerformedThisFrame()) processSelectItemAction(3);
-        else if (item5.WasPerformedThisFrame()) processSelectItemAction(4);
-        else if (item6.WasPerformedThisFrame()) processSelectItemAction(5);
-        else if (item7.WasPerformedThisFrame()) processSelectItemAction(6);
-        else if (item8.WasPerformedThisFrame()) processSelectItemAction(7);
+        
 
     }
     public bool isWASD() => inputVector.x != 0 || inputVector.y != 0;
     private void setInputVector()
     {
-        Vector2 vec = movementAction.ReadValue<Vector2>();
+        Vector2 vec = PlayerActions.movementAction.ReadValue<Vector2>();
         inputVector = new Vector2(vec.x, vec.y);
     }
 
@@ -153,7 +105,7 @@ public class PlayerController : MonoBehaviour
     }
     public void processRotation()
     {
-        Vector2 vec = rotationAction.ReadValue<Vector2>();
+        Vector2 vec = PlayerActions.rotationAction.ReadValue<Vector2>();
         transform.Rotate(new Vector3(0.0f, vec.x * Time.deltaTime * rotationSpeed, 0.0f));
 
         cameraTarget.Rotate(new Vector3(-vec.y * Time.deltaTime * rotationSpeed, 0.0f, 0.0f));
@@ -165,18 +117,16 @@ public class PlayerController : MonoBehaviour
         if (!characterController.isGrounded) characterController.Move(new Vector3(0.0f, -1.0f, 0.0f) * 10.0f * Time.deltaTime);
         
     }
-    private void processSelectItemAction(int index)
+    public void processSelectItemAction(int index)
     {
         _inventory.unSelectItem();
-
-        _selectedIndex = index;
 
         _UIScript.setSelectedIcon(index);
 
         _inventory.selectItem(index, PlacebleObjectTransform);
 
     }
-    private void processInterractAction()
+    public void processInterractAction()
     {
         if (_focusItem != null)
         {
@@ -193,7 +143,7 @@ public class PlayerController : MonoBehaviour
 
         } 
     }
-    private void processItemInterractAction()
+    public void processItemInterractAction()
     {
         if ( _inventory.ActiveItem != null)
         {
@@ -212,7 +162,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void processDropAction()
+    public void processDropAction()
     {
         _UIScript.unSetSelectedIcon();
 
@@ -257,7 +207,7 @@ public class PlayerController : MonoBehaviour
         GameObject gameObject = getFocusItemObject();
         if (gameObject != null)
         {
-            if (clickAction.WasPerformedThisFrame()) Debug.Log(gameObject.name);
+            if (PlayerActions.clickAction.WasPerformedThisFrame()) Debug.Log(gameObject.name);
             GameObject rootObject = gameObject.transform.root.gameObject;
             IItem rootObjectScript = rootObject.GetComponent<IItem>();
             if (rootObjectScript != null)

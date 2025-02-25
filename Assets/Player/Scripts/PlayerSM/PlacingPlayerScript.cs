@@ -1,14 +1,13 @@
-﻿
 using UnityEngine;
 
 namespace gameCore
 {
-    internal class IdlePlayerState:IState
+    internal class PlacingPlayerState : IState
     {
         private readonly PlayerController _player;
-        public StateType Type { get; private set; } = StateType.IdleState;
+        public StateType Type { get; private set; } = StateType.PlacingState;
         public bool Equals(IState state) { return this.Type.Equals(state.Type); }
-        public IdlePlayerState(PlayerController player)
+        public PlacingPlayerState(PlayerController player)
         {
             _player = player;
         }
@@ -16,20 +15,10 @@ namespace gameCore
         {
             Debug.Log("Entered " + getName());
 
-            
-
         }
         public void Update()
         {
-            if (false)
-            {
-
-            }
-            else if (_player.isWASD())
-            {
-                _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.RunState]);
-
-            }
+            
 
 
 
@@ -41,5 +30,6 @@ namespace gameCore
         }
         public string getName() { return Type.ToString(); }
     }
-
 }
+
+

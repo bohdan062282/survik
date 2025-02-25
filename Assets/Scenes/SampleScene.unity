@@ -899,6 +899,10 @@ PrefabInstance:
       propertyPath: droppedOutlineColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2505467371002424722, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
+      propertyPath: movementAction.m_Name
+      value: Movement
+      objectReference: {fileID: 0}
     - target: {fileID: 6740968993926302071, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

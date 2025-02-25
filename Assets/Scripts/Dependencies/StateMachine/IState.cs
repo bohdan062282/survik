@@ -11,5 +11,5 @@ namespace gameCore
         public bool Equals(IState state);
         public StateType Type { get; }
     }
-    internal enum StateType { IdlePlayerState, RunPlayerState }
+    internal enum StateType { IdleState, RunState, DefaultState, PlacingState }
 }

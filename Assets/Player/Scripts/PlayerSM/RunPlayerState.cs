@@ -5,7 +5,7 @@ namespace gameCore
     internal class RunPlayerState:IState
     {
         private readonly PlayerController _player;
-        public StateType Type { get; private set; } = StateType.RunPlayerState;
+        public StateType Type { get; private set; } = StateType.RunState;
         public bool Equals(IState state) { return this.Type.Equals(state.Type); }
         public RunPlayerState(PlayerController player)
         {
@@ -24,7 +24,7 @@ namespace gameCore
             }
             else
             {
-                if (!_player.isWASD()) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.IdlePlayerState]);
+                if (!_player.isWASD()) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.IdleState]);
                 else _player.processMovement();
             }
 
