@@ -2,6 +2,7 @@
 using UnityEngine.InputSystem;
 using gameCore;
 using System;
+using UnityEditor.Rendering.LookDev;
 
 
 public class PlayerController : MonoBehaviour
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private Inventory _inventory;
     private Item _focusItem;
     private float _movementSpeed;
+    private bool _wasSelectedItemThisFrame;
 
     internal StateMachine stateMachine1 { get; private set; }
     internal StateMachine stateMachine2 { get; private set; }
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
         _inventory = new Inventory(10, 5);
         _focusItem = null;
         _movementSpeed = movementSpeed;
+        _wasSelectedItemThisFrame = false;
 
         _UIScript.Initialize();
 
@@ -64,6 +67,15 @@ public class PlayerController : MonoBehaviour
         stateMachine1.Initialize(stateMachine1.States[StateType.IdleState]);
         stateMachine2.Initialize(stateMachine2.States[StateType.DefaultState]);
 
+
+        PlayerActions.item1.performed += (x) => { _wasSelectedItemThisFrame = true; };
+        PlayerActions.item2.performed += (x) => { _wasSelectedItemThisFrame = true; };
+        PlayerActions.item3.performed += (x) => { _wasSelectedItemThisFrame = true; };
+        PlayerActions.item4.performed += (x) => { _wasSelectedItemThisFrame = true; };
+        PlayerActions.item5.performed += (x) => { _wasSelectedItemThisFrame = true; };
+        PlayerActions.item6.performed += (x) => { _wasSelectedItemThisFrame = true; };
+        PlayerActions.item7.performed += (x) => { _wasSelectedItemThisFrame = true; };
+        PlayerActions.item8.performed += (x) => { _wasSelectedItemThisFrame = true; };
 
     }
 
@@ -86,7 +98,8 @@ public class PlayerController : MonoBehaviour
 
         if (PlayerActions.jumpAction.WasPerformedThisFrame() && characterController.isGrounded) characterController.Move(new Vector3(0.0f, 3.0f, 0.0f));
 
-        
+
+        _wasSelectedItemThisFrame = false;
 
     }
     public bool isWASD() => inputVector.x != 0 || inputVector.y != 0;
@@ -117,18 +130,16 @@ public class PlayerController : MonoBehaviour
         if (!characterController.isGrounded) characterController.Move(new Vector3(0.0f, -1.0f, 0.0f) * 10.0f * Time.deltaTime);
         
     }
-    public void processSelectItemAction(int index)
+    public bool processSelectItemAction(int index)
     {
-        _inventory.unSelectItem();
-
+        
         _UIScript.setSelectedIcon(index);
 
-        _inventory.selectItem(index, PlacebleObjectTransform);
-
+         return _inventory.selectItem(index, PlacebleObjectTransform);
     }
     public void processInterractAction()
     {
-        if (_focusItem != null)
+        if (_focusItem != null && _focusItem.IsDropped)
         {
             if (_inventory.addItem(_focusItem))
             {
@@ -140,7 +151,6 @@ public class PlayerController : MonoBehaviour
             {
                 _focusItem.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
             }
-
         } 
     }
     public void processItemInterractAction()
@@ -234,6 +244,7 @@ public class PlayerController : MonoBehaviour
         else return (cameraTransform.position + (cameraTransform.forward * interractDistance), PlacebleObjectTransform.up);
     }
 
-
+    public bool getWasSelectedThisFrame() => _wasSelectedItemThisFrame;
+    internal Inventory getInventory() => _inventory;
 
 }

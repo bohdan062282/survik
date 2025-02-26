@@ -16,10 +16,18 @@ namespace gameCore
             _slots = new bool[height, width];
             Items = new List<Item>();
         }
-        public void selectItem(int index, Transform placingObjtransform)
+        public bool selectItem(int index, Transform placingObjtransform)
         {
-            if (Items.Count < index + 1) ActiveItem = null;
-            else ActiveItem = Items[index].select();
+            if (Items.Count < index + 1)
+            {
+                ActiveItem = null;
+                return false;
+            }
+            else
+            {
+                ActiveItem = Items[index].select();
+                return true;
+            }
         }
         public void unSelectItem()
         {
