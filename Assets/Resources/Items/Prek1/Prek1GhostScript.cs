@@ -4,6 +4,7 @@ public class Prek1GhostScript : MonoBehaviour, IPlaceble
 {
 
     private PlayerController _playerController;
+    private float _rotationOffset;
 
     void Start()
     {
@@ -25,6 +26,8 @@ public class Prek1GhostScript : MonoBehaviour, IPlaceble
 
             transform.position = transformParam.Item1;
             transform.up = transformParam.Item2;
+
+            
         }
     }
     public void setPlacingObjPosTransform(PlayerController playerController)

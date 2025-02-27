@@ -19,12 +19,11 @@ namespace gameCore
         public void Update()
         {
 
-            if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInterractAction();
-
-            //if (PlayerActions.clickAction.WasPerformedThisFrame()) _player.processItemInterractAction();
+            if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInteractAction();
 
             if (_player.getWasSelectedThisFrame())
             {
+                //mby usSelect need to be in only another states
                 _player.getInventory().unSelectItem();
 
                 bool isItemSelected = false;
@@ -38,12 +37,19 @@ namespace gameCore
                 else if (PlayerActions.item7.WasPerformedThisFrame()) isItemSelected = _player.processSelectItemAction(6);
                 else if (PlayerActions.item8.WasPerformedThisFrame()) isItemSelected = _player.processSelectItemAction(7);
 
-                if (_player.getInventory().ActiveItem is StandingItem)
-                    _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.PlacingState]);
+                if (isItemSelected)
+                {
+                    if (_player.getInventory().ActiveItem is StandingItem)
+                    {
+                        _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.PlacingState]);
+                    }
+                }
+            }
+            else if (PlayerActions.dropAction.WasPerformedThisFrame())
+            {
+                _player.processDropAction();
             }
 
-            //if (PlayerActions.dropAction.WasPerformedThisFrame()) _player.processDropAction();
-            
 
         }
         public void Exit()

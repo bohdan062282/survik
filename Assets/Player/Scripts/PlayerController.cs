@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [Header("References")]
     [Space(10)]
-    [SerializeField] private UIScript _UIScript;
+    [SerializeField] public UIScript UIScript;
     [SerializeField] public CharacterController characterController;
     [SerializeField] public Transform cameraTarget;
     [SerializeField] public Transform cameraTransform;
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         _movementSpeed = movementSpeed;
         _wasSelectedItemThisFrame = false;
 
-        _UIScript.Initialize();
+        UIScript.Initialize();
 
 
         stateMachine1 = new StateMachine(new IState[] { new IdlePlayerState(this), 
@@ -133,11 +133,11 @@ public class PlayerController : MonoBehaviour
     public bool processSelectItemAction(int index)
     {
         
-        _UIScript.setSelectedIcon(index);
+        UIScript.setSelectedIcon(index);
 
-         return _inventory.selectItem(index, PlacebleObjectTransform);
+        return _inventory.selectItem(index, PlacebleObjectTransform);
     }
-    public void processInterractAction()
+    public void processInteractAction()
     {
         if (_focusItem != null && _focusItem.IsDropped)
         {
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
             {
                 _focusItem.take(this);
 
-                _UIScript.updateToolbar(_inventory.Items);
+                UIScript.updateToolbar(_inventory.Items);
             }
             else
             {
@@ -153,28 +153,9 @@ public class PlayerController : MonoBehaviour
             }
         } 
     }
-    public void processItemInterractAction()
-    {
-        if ( _inventory.ActiveItem != null)
-        {
-            if (_inventory.ActiveItem is StandingItem)
-            {
-                Item item = _inventory.dropActiveItem();
-                if (item != null)
-                {
-                    _UIScript.unSetSelectedIcon();
-                    item.unSelect();
-                    item.interract();
-
-                    _UIScript.updateToolbar(_inventory.Items);
-
-                }
-            }
-        }
-    }
     public void processDropAction()
     {
-        _UIScript.unSetSelectedIcon();
+        UIScript.unSetSelectedIcon();
 
         Item item = _inventory.dropActiveItem();
         if (item != null)
@@ -183,7 +164,7 @@ public class PlayerController : MonoBehaviour
             item.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
         }
 
-        _UIScript.updateToolbar(_inventory.Items);
+        UIScript.updateToolbar(_inventory.Items);
     }
     private void updateFocusItem()
     {
@@ -197,13 +178,13 @@ public class PlayerController : MonoBehaviour
                 _focusItem.onFocusExit();
                 _focusItem = null;
             }
-            _UIScript.targetItemText.text = "";
+            UIScript.targetItemText.text = "";
         }
         else
         {
             if (_focusItem != newFocusItem)
             {
-                _UIScript.targetItemText.text = newFocusItem.getName();
+                UIScript.targetItemText.text = newFocusItem.getName();
                 newFocusItem.onFocusEnter();
                 _focusItem = newFocusItem;
             }
