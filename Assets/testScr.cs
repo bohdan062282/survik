@@ -23,11 +23,26 @@ public class testScr : MonoBehaviour
                                 Resources.Load<Sprite>("Items/Flask/FlaskTexture"), "Flask1", 2, 2);
         Item item5 = new Item(  Resources.Load<GameObject>("Items/Flask/Flask"), 
                                 Resources.Load<Sprite>("Items/Flask/FlaskTexture"), "Flask2", 2, 2);
+        Item item6 = new Item(Resources.Load<GameObject>("Items/Apple/Apple"),
+                                Resources.Load<Sprite>("Items/Apple/AppleTexture"), "Apple1", 1, 1);
+        Item item7 = new Item(Resources.Load<GameObject>("Items/Apple/Apple"),
+                                Resources.Load<Sprite>("Items/Apple/AppleTexture"), "Apple2", 1, 1);
+        Item item8 = new Item(Resources.Load<GameObject>("Items/CampingKnife/CampingKnife"),
+                                Resources.Load<Sprite>("Items/CampingKnife/CampingKnifeTexture"), "Knife", 1, 2);
+        Item item9 = new Item(Resources.Load<GameObject>("Items/Cement/Cement"),
+                                Resources.Load<Sprite>("Items/Cement/CementTexture"), "Cement", 2, 3);
+        Item item10 = new Item(Resources.Load<GameObject>("Items/GasCylinder/GasCylinder"),
+                                Resources.Load<Sprite>("Items/GasCylinder/GasCylinderTexture"), "GasCylinder", 2, 3);
         item1.Instantiate(new Vector3(-6.0f, 1.0f, -4.0f));
         item2.Instantiate(new Vector3(-10.0f, 1.0f, -4.0f));
         item3.Instantiate(new Vector3(-14.0f, 1.0f, -4.0f));
         item4.Instantiate(new Vector3(-16.0f, 1.0f, -4.0f));
         item5.Instantiate(new Vector3(-18.0f, 1.0f, -4.0f));
+        item6.Instantiate(new Vector3(-19.0f, 3.0f, -4.0f));
+        item7.Instantiate(new Vector3(-19.5f, 2.0f, -4.0f));
+        item8.Instantiate(new Vector3(-5.0f, 2.0f, -4.0f));
+        item9.Instantiate(new Vector3(-6.0f, 2.0f, -5.0f));
+        item10.Instantiate(new Vector3(-7.0f, 2.0f, -5.0f));
 
     }
 
