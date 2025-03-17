@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class Prek1GhostScript : MonoBehaviour, IPlaceble
+public class BarrelGhostScript : MonoBehaviour, IPlaceble
 {
+
 
     private PlayerController _playerController;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
@@ -26,7 +28,7 @@ public class Prek1GhostScript : MonoBehaviour, IPlaceble
             transform.position = transformParam.Item1;
             transform.up = transformParam.Item2;
 
-            
+
         }
     }
     public void setPlacingObjPosTransform(PlayerController playerController)

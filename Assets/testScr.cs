@@ -33,6 +33,11 @@ public class testScr : MonoBehaviour
                                 Resources.Load<Sprite>("Items/Cement/CementTexture"), "Cement", 2, 3);
         Item item10 = new Item(Resources.Load<GameObject>("Items/GasCylinder/GasCylinder"),
                                 Resources.Load<Sprite>("Items/GasCylinder/GasCylinderTexture"), "GasCylinder", 2, 3);
+        Item item11 = new StandingItem(Resources.Load<GameObject>("Items/Barrel/Barrel"),
+                                        Resources.Load<Sprite>("Items/Barrel/BarrelTexture"), "Barrel", 3, 5,
+                                        Resources.Load<GameObject>("Items/Barrel/BarrelPlacing"),
+                                        Resources.Load<GameObject>("Items/Barrel/BarrelStanding"),
+                                        Resources.Load<GameObject>("Items/Barrel/BarrelGhost"));
         item1.Instantiate(new Vector3(-6.0f, 1.0f, -4.0f));
         item2.Instantiate(new Vector3(-10.0f, 1.0f, -4.0f));
         item3.Instantiate(new Vector3(-14.0f, 1.0f, -4.0f));
@@ -43,6 +48,7 @@ public class testScr : MonoBehaviour
         item8.Instantiate(new Vector3(-5.0f, 2.0f, -4.0f));
         item9.Instantiate(new Vector3(-6.0f, 2.0f, -5.0f));
         item10.Instantiate(new Vector3(-7.0f, 2.0f, -5.0f));
+        item11.Instantiate(new Vector3(-4.0f, 2.0f, -3.0f));
 
     }
 
