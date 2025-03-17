@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6137059936718555983}
   - component: {fileID: 7099059404345640170}
   - component: {fileID: 4999025975849906208}
-  - component: {fileID: -1042698768625905085}
+  - component: {fileID: 1818719700119535290}
   m_Layer: 8
   m_Name: BarrelPlacing
   m_TagString: Untagged
@@ -88,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1042698768625905085
+--- !u!114 &1818719700119535290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,6 +97,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6800690333703492085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9632ecc7d4e42f84185df086d61d29e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2884fbf541e08d941bdc74e24a601522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

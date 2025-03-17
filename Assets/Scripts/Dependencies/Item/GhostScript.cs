@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class Prek1GhostScript : MonoBehaviour, IPlaceble
+public class GhostScript : MonoBehaviour
 {
 
-    private PlayerController _playerController;
+
+    protected PlayerController _playerController;
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -26,10 +27,9 @@ public class Prek1GhostScript : MonoBehaviour, IPlaceble
             transform.position = transformParam.Item1;
             transform.up = transformParam.Item2;
 
-            
         }
     }
-    public void setPlacingObjPosTransform(PlayerController playerController)
+    public void initialize(PlayerController playerController)
     {
         _playerController = playerController;
     }

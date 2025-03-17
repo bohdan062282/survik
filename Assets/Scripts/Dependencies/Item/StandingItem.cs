@@ -42,10 +42,10 @@ public class StandingItem : Item
     {
         base.take(playerController);
 
-        IPlaceble placebleScr1 = _placebleObject.GetComponent<IPlaceble>();
-        if (placebleScr1 != null) placebleScr1.setPlacingObjPosTransform(playerController);
-        IPlaceble placebleScr2 = _ghostObject.GetComponent<IPlaceble>();
-        if (placebleScr2 != null) placebleScr2.setPlacingObjPosTransform(playerController);
+        PlacingScript placebleScr1 = _placebleObject.GetComponent<PlacingScript>();
+        if (placebleScr1 != null) placebleScr1.initialize(playerController);
+        GhostScript placebleScr2 = _ghostObject.GetComponent<GhostScript>();
+        if (placebleScr2 != null) placebleScr2.initialize(playerController);
 
     }
     public override Item select()

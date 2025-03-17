@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5555571055143665760}
-  - component: {fileID: -8081548844981315471}
+  - component: {fileID: 8082380899276454532}
   m_Layer: 8
   m_Name: Prek1Placing
   m_TagString: Untagged
@@ -66,7 +66,7 @@ Transform:
   - {fileID: 5705726394149907511}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8081548844981315471
+--- !u!114 &8082380899276454532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6179173749932076958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef44cecce81fa1c479bb4e909530dfb4, type: 3}
+  m_Script: {fileID: 11500000, guid: 2884fbf541e08d941bdc74e24a601522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6290194241810135173

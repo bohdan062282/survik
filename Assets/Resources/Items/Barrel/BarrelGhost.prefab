@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6860225863304648154}
   - component: {fileID: 9047488412083556262}
   - component: {fileID: 508713223343156442}
-  - component: {fileID: 8868829539086632678}
+  - component: {fileID: -3255553382865769142}
   m_Layer: 8
   m_Name: BarrelGhost
   m_TagString: Untagged
@@ -88,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8868829539086632678
+--- !u!114 &-3255553382865769142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,6 +97,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4642528773088027721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24fd8c353e37d7c4a86acc6365573b55, type: 3}
+  m_Script: {fileID: 11500000, guid: a0775c2b09179de48adeb20694027249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

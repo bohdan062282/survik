@@ -1,23 +1,23 @@
 using UnityEngine;
 
-public class Prek1PlacingScript : MonoBehaviour, IPlaceble
+public class PlacingScript : MonoBehaviour
 {
 
-    private PlayerController _playerController;
+
+    protected PlayerController _playerController;
 
     void Start()
     {
-
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
 
         updatePosition();
 
     }
-    public void updatePosition()
+    private void updatePosition()
     {
         if (_playerController != null)
         {
@@ -25,7 +25,7 @@ public class Prek1PlacingScript : MonoBehaviour, IPlaceble
             transform.rotation = _playerController.PlacebleObjectTransform.rotation;
         }
     }
-    public void setPlacingObjPosTransform(PlayerController playerController)
+    public void initialize(PlayerController playerController)
     {
         _playerController = playerController;
     }
