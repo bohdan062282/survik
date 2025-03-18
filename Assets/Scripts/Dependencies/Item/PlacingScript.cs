@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class PlacingScript : MonoBehaviour
+public class PlacingScript : ActiveItemScript
 {
-
-
-    protected PlayerController _playerController;
 
     void Start()
     {
@@ -17,7 +14,7 @@ public class PlacingScript : MonoBehaviour
         updatePosition();
 
     }
-    private void updatePosition()
+    protected override void updatePosition()
     {
         if (_playerController != null)
         {
@@ -25,8 +22,5 @@ public class PlacingScript : MonoBehaviour
             transform.rotation = _playerController.PlacebleObjectTransform.rotation;
         }
     }
-    public void initialize(PlayerController playerController)
-    {
-        _playerController = playerController;
-    }
+
 }

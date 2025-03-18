@@ -17,14 +17,17 @@ namespace gameCore
         private GameObject _prefab;
         private Sprite _icon;
         private GameObject _droppedGameObject;
+        private GameObject _activeItemPrefab;
+        private GameObject _activeItemGameObject;
         protected PlayerController _playerController;
 
-        public Item(GameObject prefab, Sprite iconSprite, string name, int height, int width)
+        public Item(GameObject prefab, Sprite iconSprite, string name, int height, int width, GameObject activeItemPrefab)
         {
             _name = name;
             _prefab = prefab;
             _icon = iconSprite;
             _size = new Vector2Int(height, width);
+            _activeItemPrefab = activeItemPrefab;
 
             //refactor
             IsDropped = true;
@@ -35,6 +38,9 @@ namespace gameCore
             _droppedGameObject.GetComponent<IItem>().Initialize(this);
             Outline outlineScr = _droppedGameObject.GetComponent<Outline>();
             if (outlineScr != null) outlineScr.enabled = false;
+            _activeItemGameObject = UnityEngine.Object.Instantiate(_activeItemPrefab);
+            _activeItemGameObject.SetActive(false);
+
         }
         public virtual void onFocusEnter()
         {
@@ -62,6 +68,9 @@ namespace gameCore
             _droppedGameObject.SetActive(false);
 
             _playerController = playerController;
+
+            ActiveItemScript activeItemScript = _activeItemGameObject.GetComponent<ActiveItemScript>();
+            if (activeItemScript != null) activeItemScript.initialize(playerController);
         }
         public void drop(Vector3 position, float Yrotation, Vector3 force)
         {
@@ -79,12 +88,13 @@ namespace gameCore
         }
         public virtual Item select()
         {
+            _activeItemGameObject.SetActive(true);
 
             return this;
         }
         public virtual void unSelect()
         {
-
+            _activeItemGameObject.SetActive(false);
         }
         public virtual void interract()
         {

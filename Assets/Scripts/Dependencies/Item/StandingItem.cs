@@ -5,27 +5,23 @@ public class StandingItem : Item
 {
     public static UnityEngine.Color standingOutlineColor = UnityEngine.Color.green;
 
-    private GameObject _placebleObjectPrefab;
-    private GameObject _placebleObject;
+
     private GameObject _standingObjectPrefab;
     private GameObject _standingObject;
     private GameObject _ghostObjectPrefab;
     private GameObject _ghostObject;
 
+
     public StandingItem(GameObject prefab, Sprite iconSprite, string name, int height, int width, 
-                        GameObject placebleObjectPrefab, GameObject standingObjectPrefab, GameObject ghostObjectPrefab)
-            : base(prefab, iconSprite, name, height, width)
+                        GameObject activeItemPrefab, GameObject standingObjectPrefab, GameObject ghostObjectPrefab)
+            : base(prefab, iconSprite, name, height, width, activeItemPrefab)
     {
-        _placebleObjectPrefab = placebleObjectPrefab;
         _standingObjectPrefab = standingObjectPrefab;
         _ghostObjectPrefab = ghostObjectPrefab;
     }
     public override void Instantiate(Vector3 position)
     {
         base.Instantiate(position);
-
-        _placebleObject = UnityEngine.GameObject.Instantiate(_placebleObjectPrefab);
-        _placebleObject.SetActive(false);
 
         _standingObject = UnityEngine.GameObject.Instantiate(_standingObjectPrefab);
         _standingObject.GetComponent<IItem>().Initialize(this);
@@ -42,8 +38,6 @@ public class StandingItem : Item
     {
         base.take(playerController);
 
-        PlacingScript placebleScr1 = _placebleObject.GetComponent<PlacingScript>();
-        if (placebleScr1 != null) placebleScr1.initialize(playerController);
         GhostScript placebleScr2 = _ghostObject.GetComponent<GhostScript>();
         if (placebleScr2 != null) placebleScr2.initialize(playerController);
 
@@ -52,7 +46,6 @@ public class StandingItem : Item
     {
         base.select();
 
-        _placebleObject.SetActive(true);
         _ghostObject.SetActive(true);
 
         return this;
@@ -61,7 +54,6 @@ public class StandingItem : Item
     {
         base.unSelect();
 
-        _placebleObject.SetActive(false);
         _ghostObject.SetActive(false);
     }
     public override void interract()
