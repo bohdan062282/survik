@@ -16,11 +16,9 @@ public class PlacingScript : ActiveItemScript
     }
     protected override void updatePosition()
     {
-        if (_playerController != null)
-        {
-            transform.position = _playerController.PlacebleObjectTransform.position;
-            transform.rotation = _playerController.PlacebleObjectTransform.rotation;
-        }
+
+        base.updatePosition();
+
     }
 
 }

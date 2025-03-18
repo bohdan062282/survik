@@ -19,7 +19,11 @@ public class ActiveItemScript : MonoBehaviour
 
     protected virtual void updatePosition()
     {
-        
+        if (_playerController != null)
+        {
+            transform.position = _playerController.PlacebleObjectTransform.position;
+            transform.rotation = _playerController.PlacebleObjectTransform.rotation;
+        }
     }
     public void initialize(PlayerController playerController)
     {
