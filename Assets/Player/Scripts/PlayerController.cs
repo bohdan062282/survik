@@ -182,7 +182,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (_focusItem != newFocusItem)
+            if (_focusItem != null)
+            {
+                if (_focusItem != newFocusItem)
+                {
+                    UIScript.targetItemText.text = newFocusItem.getName();
+                    _focusItem.onFocusExit();
+                    newFocusItem.onFocusEnter();
+                    _focusItem = newFocusItem;
+                }
+            }
+            else
             {
                 UIScript.targetItemText.text = newFocusItem.getName();
                 newFocusItem.onFocusEnter();
