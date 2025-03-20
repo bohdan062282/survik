@@ -1987,6 +1987,9 @@ MonoBehaviour:
   itemLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  hittableLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
   PlacebleObjectTransform: {fileID: 5046680105772233795}
   ActiveObjectTransform: {fileID: 1943070768176409256}
   groundLayerMask:

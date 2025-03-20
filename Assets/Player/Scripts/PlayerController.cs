@@ -28,7 +28,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public CharacterController characterController;
     [SerializeField] public Transform cameraTarget;
     [SerializeField] public Transform cameraTransform;
+
     [SerializeField] public LayerMask itemLayerMask;
+    [SerializeField] public LayerMask hittableLayerMask;
 
     [SerializeField] public Transform PlacebleObjectTransform;
     [SerializeField] public Transform ActiveObjectTransform;
@@ -206,7 +208,7 @@ public class PlayerController : MonoBehaviour
     //get focus Item object
     private Item getFocusItem()
     {
-        GameObject gameObject = getFocusItemObject();
+        GameObject gameObject = getFocusObject(interractDistance, itemLayerMask);
         if (gameObject != null)
         {
             GameObject rootObject = gameObject.transform.root.gameObject;
@@ -222,10 +224,10 @@ public class PlayerController : MonoBehaviour
         else return null;
     }
     //get object by scope focus using interractDistance
-    private GameObject getFocusItemObject()
+    public GameObject getFocusObject(float distance, LayerMask layerMask)
     {
         RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interractDistance, itemLayerMask))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, distance, layerMask))
             return hit.collider.gameObject;
         else
             return null;
