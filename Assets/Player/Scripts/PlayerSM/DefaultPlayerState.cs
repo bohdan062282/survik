@@ -21,7 +21,12 @@ namespace gameCore
 
             if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInteractAction();
 
-            if (_player.getWasSelectedThisFrame())
+            if (PlayerActions.clickAction.WasPerformedThisFrame())
+            {
+                Item item = _player.getInventory().ActiveItem;
+                if (item != null) item.leftMouseClick();
+            }    
+            else if (_player.getWasSelectedThisFrame())
             {
                 //mby usSelect need to be in only another states
                 _player.getInventory().unSelectItem();

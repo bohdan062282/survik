@@ -883,26 +883,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2505467371002424722, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
-      propertyPath: droppedOutlineColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2505467371002424722, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
-      propertyPath: droppedOutlineColor.b
-      value: 0.19433957
-      objectReference: {fileID: 0}
-    - target: {fileID: 2505467371002424722, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
-      propertyPath: droppedOutlineColor.g
-      value: 0.9291718
-      objectReference: {fileID: 0}
-    - target: {fileID: 2505467371002424722, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
-      propertyPath: droppedOutlineColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2505467371002424722, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
-      propertyPath: movementAction.m_Name
-      value: Movement
-      objectReference: {fileID: 0}
     - target: {fileID: 6740968993926302071, guid: 9fd3abbd146f68848b046dbfe7090143, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

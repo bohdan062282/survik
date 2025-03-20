@@ -29,4 +29,8 @@ public class ActiveItemScript : MonoBehaviour
     {
         _playerController = playerController;
     }
+    public virtual void interract()
+    {
+
+    }
 }

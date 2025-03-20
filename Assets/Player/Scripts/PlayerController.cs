@@ -29,7 +29,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Transform cameraTarget;
     [SerializeField] public Transform cameraTransform;
     [SerializeField] public LayerMask itemLayerMask;
+
     [SerializeField] public Transform PlacebleObjectTransform;
+    [SerializeField] public Transform ActiveObjectTransform;
+
     [SerializeField] private LayerMask groundLayerMask;
 
     //temp

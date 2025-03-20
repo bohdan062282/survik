@@ -56,9 +56,10 @@ public class StandingItem : Item
 
         _ghostObject.SetActive(false);
     }
-    public override void interract()
+    public override void leftMouseClick()
     {
-        base.interract();
+        //be carefull mby add base method
+        //base.leftMouseClick();
 
         _standingObject.SetActive(true);
         

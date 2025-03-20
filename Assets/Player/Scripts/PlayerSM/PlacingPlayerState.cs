@@ -78,7 +78,7 @@ namespace gameCore
                 _player.UIScript.unSetSelectedIcon();
                 item.unSelect();
 
-                item.interract();
+                item.leftMouseClick();
 
                 _player.UIScript.updateToolbar(_player.getInventory().Items);
 
