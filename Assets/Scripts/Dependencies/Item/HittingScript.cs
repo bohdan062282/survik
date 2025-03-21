@@ -12,7 +12,7 @@ public class HittingScript : ActiveItemScript
     protected float _hitDistance = 2.0f;
     protected float _damage = 10.0f;
 
-    protected bool _canHit;
+    protected bool _canHit = true;
 
 
     public override void initialize(PlayerController playerController)

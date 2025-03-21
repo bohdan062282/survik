@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CampingKnifeAttack
+  m_Name: CampingAxeAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 03de1c947f395b643974f4d7e1385295, type: 2}
+  m_Motion: {fileID: 7400000, guid: 19852c1286b1bb143933bb49aa8a5d95, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -83,7 +83,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AttackItemAnimator
+  m_Name: CampingAxeAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Attack
@@ -126,7 +126,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9204e368ef6c0ce4a957926306394a13, type: 2}
+  m_Motion: {fileID: 7400000, guid: d1881d64ca4f9b846941cdffa4075166, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
