@@ -11,14 +11,8 @@ public class PlacingScript : ActiveItemScript
     void Update()
     {
 
-        updatePosition();
 
     }
-    protected override void updatePosition()
-    {
 
-        base.updatePosition();
-
-    }
 
 }

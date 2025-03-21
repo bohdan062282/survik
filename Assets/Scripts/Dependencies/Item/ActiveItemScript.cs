@@ -13,21 +13,17 @@ public class ActiveItemScript : MonoBehaviour
     void Update()
     {
 
-        updatePosition();
 
     }
 
-    protected virtual void updatePosition()
-    {
-        if (_playerController != null)
-        {
-            transform.position = _playerController.PlacebleObjectTransform.position;
-            transform.rotation = _playerController.PlacebleObjectTransform.rotation;
-        }
-    }
-    public void initialize(PlayerController playerController)
+    public virtual void initialize(PlayerController playerController)
     {
         _playerController = playerController;
+
+        transform.SetParent(playerController.PlacebleObjectTransform);
+
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
     public virtual void interract()
     {
