@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interractDistance, groundLayerMask))
             return (hit.point, hit.normal);
-        else return (cameraTransform.position + (cameraTransform.forward * interractDistance), PlacebleObjectTransform.up);
+        else return (cameraTransform.position + (cameraTransform.forward * interractDistance), transform.up);
     }
 
     public bool getWasSelectedThisFrame() => _wasSelectedItemThisFrame;
