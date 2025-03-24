@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
     [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
     [SerializeField] private Color droppedOutlineColor;
+    [SerializeField] private Color standingOutlineColor;
     [Space(10)]
 
     [Space(10)]
@@ -50,12 +51,18 @@ public class PlayerController : MonoBehaviour
     internal StateMachine stateMachine1 { get; private set; }
     internal StateMachine stateMachine2 { get; private set; }
 
+    void Awake()
+    {
+        Item.droppedOutlineColor = droppedOutlineColor;
+        StandingItem.standingOutlineColor = standingOutlineColor;
+    }
     void Start()
     {
         _inventory = new Inventory(10, 5);
         _focusItem = null;
         _movementSpeed = movementSpeed;
         _wasSelectedItemThisFrame = false;
+
 
         UIScript.Initialize();
 
