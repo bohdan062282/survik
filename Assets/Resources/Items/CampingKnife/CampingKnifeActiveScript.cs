@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class CampingKnifeActiveScript : HittingScript
+public class CampingKnifeActiveScript : HittingActiveScript
 {
 
     void Start()

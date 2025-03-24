@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngineInternal;
 
-public class HittingScript : ActiveItemScript
+public class HittingActiveScript : ActiveItemScript
 {
 
     [SerializeField] protected Animator animator;

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 104d0244d644c17468caa7f6d2ffc934, type: 3}
-  m_Name: CampingAxe
+  m_Name: ArmyPistol
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: CampingAxe
-  height: 4
+  id: 11
+  itemName: 
+  height: 2
   width: 2
   itemRarity: 0
   itemType: 0
