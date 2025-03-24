@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7380836399525361189}
   - component: {fileID: 8088090710854889497}
   - component: {fileID: 3079567984129725423}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 43631947969655118}
   - component: {fileID: 6405580278276029209}
   - component: {fileID: 3919609634796898618}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,4 +182,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
