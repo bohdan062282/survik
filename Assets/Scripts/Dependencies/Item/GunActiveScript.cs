@@ -3,12 +3,13 @@ using UnityEngine;
 public class GunActiveScript : ActiveItemScript
 {
 
-    protected float _damage = 10.0f;
-    protected float _bulletSpeed = 20.0f;
-    protected int _magSize = 30;
-    protected float _calldown = 0.7f;
+    [SerializeField] protected float damage = 10.0f;
+    [SerializeField] protected float bulletSpeed = 20.0f;
+    [SerializeField] protected int magSize = 30;
+    [SerializeField] protected float calldown = 0.5f;
 
-    protected bool _canRelease = true;
+    protected bool _canSwitchMode = true;
+
     protected float _releaseStartTime;
 
     protected BulletPool bulletPool;
@@ -17,7 +18,7 @@ public class GunActiveScript : ActiveItemScript
     void Start()
     {
 
-        _releaseStartTime = Time.time - _calldown;
+        _releaseStartTime = Time.time - calldown;
 
     }
 
@@ -32,22 +33,33 @@ public class GunActiveScript : ActiveItemScript
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
 
-        bulletPool = new BulletPool(_magSize);
+        bulletPool = new BulletPool(magSize);
 
     }
     public override void interract()
     {
 
-        if (_releaseStartTime + _calldown < Time.time)
+        if (_releaseStartTime + calldown < Time.time)
         {
             bulletPool.releaseBullet(_playerController.ActiveObjectTransform.position,
-                                    _playerController.ActiveObjectTransform.forward.normalized, _bulletSpeed, _damage, _itemID);
+                                    _playerController.ActiveObjectTransform.forward.normalized, bulletSpeed, damage, _itemID);
 
             _releaseStartTime = Time.time;
         }
 
 
     }
+    public void switchMode()
+    {
+        if (_canSwitchMode)
+        {
+            if (Mode == GunMode.AUTO)
+                Mode = GunMode.SEMI;
+            else
+                Mode = GunMode.AUTO;
+        }
+    }
+           
 
 
     public GunMode Mode { get; private set; } = GunMode.SEMI;

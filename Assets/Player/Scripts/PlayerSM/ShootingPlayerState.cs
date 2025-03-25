@@ -20,12 +20,21 @@ namespace gameCore
         {
 
             if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInteractAction();
+            
+            GunItem gun = _player.getInventory().ActiveItem as GunItem;
 
-            if (PlayerActions.clickAction.WasPerformedThisFrame())
+            if (gun != null && gun.GetGunMode() == GunActiveScript.GunMode.AUTO && PlayerActions.clickAction.IsPressed())
             {
-                Item item = _player.getInventory().ActiveItem;
-                if (item != null) item.leftMouseClick();
-            }    
+                gun.leftMouseClick();
+            }
+            else if (PlayerActions.clickAction.WasPerformedThisFrame())
+            {
+                if (gun != null) gun.leftMouseClick();
+            }
+            else if (PlayerActions.switchGunModeAction.WasPerformedThisFrame())
+            {
+                if (gun != null) gun.SwitchGunMode();
+            }
             else if (_player.getWasSelectedThisFrame())
             {
                 //mby usSelect need to be in only another states

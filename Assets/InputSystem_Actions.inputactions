@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SwitchGunMode",
+                    "type": "Button",
+                    "id": "b882e85a-dff2-442e-a916-50646264b4da",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Drop",
                     "type": "Button",
                     "id": "092d429e-b6a9-43f6-ab6a-5dc9010dbf71",
@@ -348,6 +357,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "475792b4-e38f-4a67-b0b9-3fae8b57709d",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchGunMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -11,6 +11,8 @@ public class GunItem : Item
     }
 
     public GunActiveScript.GunMode GetGunMode() => _activeItemGameObject.GetComponent<GunActiveScript>().Mode;
-    
-    
+    public void SwitchGunMode() => _activeItemGameObject.GetComponent<GunActiveScript>().switchMode();
+
+
+
 }
