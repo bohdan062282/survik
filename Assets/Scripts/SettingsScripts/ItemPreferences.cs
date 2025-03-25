@@ -17,7 +17,7 @@ public class ItemPreferences : ScriptableObject
     
 
 
-    public enum ItemType { Default, Standing }
+    public enum ItemType { Default, Standing, Gun }
     public enum ItemRarity { Red, Green, Blue }
 }
 

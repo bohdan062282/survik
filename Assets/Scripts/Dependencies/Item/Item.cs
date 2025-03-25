@@ -12,17 +12,19 @@ namespace gameCore
     {
         public static UnityEngine.Color droppedOutlineColor = UnityEngine.Color.yellow;
 
+        private int _id;
         private string _name;
         private Vector2Int _size;
         private GameObject _prefab;
         private Sprite _icon;
         private GameObject _droppedGameObject;
         private GameObject _activeItemPrefab;
-        private GameObject _activeItemGameObject;
+        protected GameObject _activeItemGameObject;
         protected PlayerController _playerController;
 
-        public Item(GameObject prefab, Sprite iconSprite, string name, int height, int width, GameObject activeItemPrefab)
+        public Item(int id, GameObject prefab, Sprite iconSprite, string name, int height, int width, GameObject activeItemPrefab)
         {
+            _id = id;
             _name = name;
             _prefab = prefab;
             _icon = iconSprite;
@@ -70,7 +72,7 @@ namespace gameCore
             _playerController = playerController;
 
             ActiveItemScript activeItemScript = _activeItemGameObject.GetComponent<ActiveItemScript>();
-            if (activeItemScript != null) activeItemScript.initialize(playerController);
+            if (activeItemScript != null) activeItemScript.initialize(playerController, _id);
         }
         public void drop(Vector3 position, float Yrotation, Vector3 force)
         {

@@ -10,7 +10,7 @@ public class BulletScript : MonoBehaviour
 
     private float _damage = 0.0f;
     private float _startTime;
-    private float _lifetime = 4.0f;
+    private float _lifetime = 3.0f;
 
     private int _hittingID = 0;
 

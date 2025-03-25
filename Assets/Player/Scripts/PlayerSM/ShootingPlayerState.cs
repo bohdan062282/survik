@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace gameCore
 {
-    internal class DefaultPlayerState : IState
+    internal class ShootingPlayerState : IState
     {
         private readonly PlayerController _player;
-        public StateType Type { get; private set; } = StateType.DefaultState;
+        public StateType Type { get; private set; } = StateType.ShootingState;
         public bool Equals(IState state) { return this.Type.Equals(state.Type); }
-        public DefaultPlayerState(PlayerController player)
+        public ShootingPlayerState(PlayerController player)
         {
             _player = player;
         }
@@ -48,9 +48,9 @@ namespace gameCore
                     {
                         _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.PlacingState]);
                     }
-                    else if (_player.getInventory().ActiveItem is GunItem)
+                    else if (!(_player.getInventory().ActiveItem is GunItem))
                     {
-                        _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.ShootingState]);
+                        _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.DefaultState]);
                     }
                 }
             }

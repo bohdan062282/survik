@@ -7,16 +7,16 @@ public class HittingActiveScript : ActiveItemScript
     [SerializeField] protected Animator animator;
 
 
-    protected int _id = 0;
-
     protected float _hitDistance = 2.0f;
     protected float _damage = 10.0f;
 
     protected bool _canHit = true;
 
 
-    public override void initialize(PlayerController playerController)
+    public override void initialize(PlayerController playerController, int id)
     {
+        _itemID = id;
+
         _playerController = playerController;
 
         transform.SetParent(playerController.ActiveObjectTransform);
@@ -53,7 +53,7 @@ public class HittingActiveScript : ActiveItemScript
             Debug.Log(gameObject.name);
 
             HittableObject hittableObject = gameObject.GetComponent<HittableObject>();
-            if (hittableObject != null) hittableObject.hit(_id, _damage);
+            if (hittableObject != null) hittableObject.hit(_itemID, _damage);
         }
     }
 

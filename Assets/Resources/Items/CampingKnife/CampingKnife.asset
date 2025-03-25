@@ -16,3 +16,5 @@ MonoBehaviour:
   itemName: CampingKnife
   height: 2
   width: 1
+  itemRarity: 0
+  itemType: 0

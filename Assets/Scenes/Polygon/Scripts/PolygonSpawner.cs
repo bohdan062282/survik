@@ -37,7 +37,8 @@ public class PolygonSpawner : MonoBehaviour
         {
             string name = itemPreferences.name;
 
-            item = new Item(    Resources.Load<GameObject>("Items/" + name + "/" + name),
+            item = new Item(    itemPreferences.id,
+                                Resources.Load<GameObject>("Items/" + name + "/" + name),
                                 Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), name, itemPreferences.height, itemPreferences.width,
                                 Resources.Load<GameObject>("Items/" + name + "/" + name + "Active"));
 
@@ -47,11 +48,23 @@ public class PolygonSpawner : MonoBehaviour
         {
             string name = itemPreferences.name;
 
-            item = new StandingItem(    Resources.Load<GameObject>("Items/" + name + "/" + name),
+            item = new StandingItem(    itemPreferences.id,
+                                        Resources.Load<GameObject>("Items/" + name + "/" + name),
                                         Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), name, itemPreferences.height, itemPreferences.width,
                                         Resources.Load<GameObject>("Items/" + name + "/" + name + "Placing"),
                                         Resources.Load<GameObject>("Items/" + name + "/" + name + "Standing"),
                                         Resources.Load<GameObject>("Items/" + name + "/" + name + "Ghost"));
+
+            item.Instantiate(transform.position);
+        }
+        else if (itemPreferences.itemType == ItemPreferences.ItemType.Gun)
+        {
+            string name = itemPreferences.name;
+
+            item = new GunItem( itemPreferences.id,
+                                Resources.Load<GameObject>("Items/" + name + "/" + name),
+                                Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), name, itemPreferences.height, itemPreferences.width,
+                                Resources.Load<GameObject>("Items/" + name + "/" + name + "Active"));
 
             item.Instantiate(transform.position);
         }

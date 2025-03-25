@@ -49,6 +49,10 @@ namespace gameCore
                         if (_standingItem as Item != _player.getInventory().ActiveItem)
                             _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.PlacingState]);
                     }
+                    else if (_player.getInventory().ActiveItem is GunItem)
+                    {
+                        _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.ShootingState]);
+                    }
                     else
                     {
                         _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.DefaultState]);

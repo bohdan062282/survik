@@ -4,6 +4,7 @@ public class ActiveItemScript : MonoBehaviour
 {
 
     protected PlayerController _playerController;
+    protected int _itemID;
 
     void Start()
     {
@@ -16,8 +17,10 @@ public class ActiveItemScript : MonoBehaviour
 
     }
 
-    public virtual void initialize(PlayerController playerController)
+    public virtual void initialize(PlayerController playerController, int id)
     {
+        _itemID = id;
+
         _playerController = playerController;
 
         transform.SetParent(playerController.PlacebleObjectTransform);
