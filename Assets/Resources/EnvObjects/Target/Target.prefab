@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acc69bab14ecc646a89398a5322e8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitDecalPrefab: {fileID: 7448219479650716591, guid: 72f2b5fd0c0be6b409f3ccf60ec062d4, type: 3}
+  decalLifetime: 3
 --- !u!1 &6274652402155446329
 GameObject:
   m_ObjectHideFlags: 0

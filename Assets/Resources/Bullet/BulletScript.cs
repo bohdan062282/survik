@@ -66,7 +66,7 @@ public class BulletScript : MonoBehaviour
         {
             HittableObject hittableObject = collision.collider.gameObject.GetComponent<HittableObject>();
 
-            hittableObject.hit(_hittingID, _damage);
+            hittableObject.hit(_hittingID, _damage, collision);
         }
 
         gameObject.SetActive(false);

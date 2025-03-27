@@ -8,6 +8,10 @@ public abstract class HittableObject : MonoBehaviour
     protected Dictionary<int, float> _hittingMultiplayers = new Dictionary<int, float>();
 
     
+    public virtual void hit(int hittingTypeID, float damage, Collision collision)
+    {
+        hit(hittingTypeID, damage);
+    }
     public virtual void hit(int hittingTypeID, float damage)
     {
         if (_hittingMultiplayers.ContainsKey(hittingTypeID))
