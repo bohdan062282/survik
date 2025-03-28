@@ -6,7 +6,7 @@ public class TargetScript : HittableObject
     [SerializeField] private GameObject hitDecalPrefab;
 
     [SerializeField]
-    [Range(0.0f, 10.0f)] private float decalLifetime;
+    [Range(0.0f, 100.0f)] private float decalLifetime;
 
 
 
@@ -15,12 +15,21 @@ public class TargetScript : HittableObject
     {
         hit(hittingTypeID, damage);
 
-        GameObject decalObject = Instantiate(hitDecalPrefab, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].point));
-        Destroy(decalObject, decalLifetime);
+        foreach (ContactPoint contactPoint in collision.contacts)
+        {
+            GameObject decalObject = Instantiate(hitDecalPrefab, contactPoint.point, Quaternion.LookRotation(contactPoint.normal));
+            Destroy(decalObject, decalLifetime);
+        }
+
+
     }
     public override void hit(int hittingTypeID, float damage)
     {
         Debug.Log(gameObject.name + " hitted by: " + hittingTypeID.ToString() + "; damage: " + damage.ToString());
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
 
