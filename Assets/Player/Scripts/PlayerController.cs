@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Character skills settings")]
     [Space(10)]
-    [SerializeField][Range(5.0f, 20.0f)] private float movementSpeed;
-    [SerializeField][Range(5.0f, 20.0f)] private float sprintSpeed;
+    [SerializeField][Range(5.0f, 20.0f)] public float movementSpeed;
+    [SerializeField][Range(5.0f, 20.0f)] public float sprintSpeed;
+    [SerializeField][Range(0.0f, 5.0f)] public float jumpHeight;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
     [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
     [SerializeField] private Color droppedOutlineColor;
@@ -40,12 +41,14 @@ public class PlayerController : MonoBehaviour
 
     //temp
 
+    [HideInInspector] public readonly float gravity = 9.81f;
 
-    [HideInInspector] public Vector2 inputVector;
+    [HideInInspector] public Vector3 velocity = new Vector3(0.0f, -2.0f, 0.0f);
+
+    private Vector2 inputVector;
 
     private Inventory _inventory;
     private Item _focusItem;
-    private float _movementSpeed;
     private bool _wasSelectedItemThisFrame;
 
     internal StateMachine stateMachine1 { get; private set; }
@@ -60,15 +63,17 @@ public class PlayerController : MonoBehaviour
     {
         _inventory = new Inventory(10, 5);
         _focusItem = null;
-        _movementSpeed = movementSpeed;
         _wasSelectedItemThisFrame = false;
 
+
+        Cursor.lockState = CursorLockMode.Locked;
 
         UIScript.Initialize();
 
 
         stateMachine1 = new StateMachine(new IState[] { new IdlePlayerState(this), 
                                                         new RunPlayerState(this),
+                                                        new FallingPlayerState(this)
                                                                                     });
 
         stateMachine2 = new StateMachine(new IState[] { new DefaultPlayerState(this),
@@ -96,20 +101,18 @@ public class PlayerController : MonoBehaviour
     {
 
         setInputVector();
+
+
         updateFocusItem();
 
 
         stateMachine1.Update();
         stateMachine2.Update();
 
+
         processRotation();
-        processGravity();
+        processVelocity();
 
-
-        if (PlayerActions.sprintAction.IsPressed()) _movementSpeed = sprintSpeed;
-        else _movementSpeed = movementSpeed;
-
-        if (PlayerActions.jumpAction.WasPerformedThisFrame() && characterController.isGrounded) characterController.Move(new Vector3(0.0f, 3.0f, 0.0f));
 
 
         _wasSelectedItemThisFrame = false;
@@ -122,13 +125,12 @@ public class PlayerController : MonoBehaviour
         inputVector = new Vector2(vec.x, vec.y);
     }
 
-    //Mozhe perepisat pokruche!!
-    public void processMovement()
+    public void processMovement(float multiplayer)
     {
-        characterController.Move(   (transform.forward * inputVector.y * Time.deltaTime * _movementSpeed) + 
-                                    (transform.right * inputVector.x * Time.deltaTime * _movementSpeed)      );
-
+        characterController.Move(   (transform.forward * inputVector.y * Time.deltaTime * multiplayer) +
+                                    (transform.right * inputVector.x * Time.deltaTime * multiplayer));
     }
+
     public void processRotation()
     {
         Vector2 vec = PlayerActions.rotationAction.ReadValue<Vector2>();
@@ -137,10 +139,10 @@ public class PlayerController : MonoBehaviour
         cameraTarget.Rotate(new Vector3(-vec.y * Time.deltaTime * rotationSpeed, 0.0f, 0.0f));
 
     }
-    private void processGravity()
+    private void processVelocity()
     {
-        
-        if (!characterController.isGrounded) characterController.Move(new Vector3(0.0f, -1.0f, 0.0f) * 10.0f * Time.deltaTime);
+
+        characterController.Move(velocity * Time.deltaTime);
         
     }
     public bool processSelectItemAction(int index)

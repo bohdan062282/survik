@@ -38,6 +38,10 @@ public class BulletScript : MonoBehaviour
 
     public void release(Vector3 position, Vector3 direction, float speed, float damage, int hittingID)
     {
+
+        transform.position = position;
+        transform.forward = direction;
+
         gameObject.SetActive(true);
 
         _startTime = Time.time;
@@ -46,10 +50,7 @@ public class BulletScript : MonoBehaviour
         _hittingID = hittingID;
 
         _rigidbody.linearVelocity = Vector3.zero;
-        _rigidbody.angularVelocity = Vector3.zero;
-
-        transform.position = position;
-        transform.forward = direction;
+        _rigidbody.angularVelocity = Vector3.zero; 
 
         _rigidbody.AddForce(direction * speed, ForceMode.VelocityChange);
 

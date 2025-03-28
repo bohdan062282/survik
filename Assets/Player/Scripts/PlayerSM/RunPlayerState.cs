@@ -18,18 +18,21 @@ namespace gameCore
         }
         public void Update()
         {
-            if (false)
-            {
 
-            }
+
+            if (!_player.characterController.isGrounded) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.FallingState]);
             else
             {
-                if (!_player.isWASD()) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.IdleState]);
-                else _player.processMovement();
+                if (_player.velocity.y < 0) _player.velocity.y = -2.0f;
+                if (PlayerActions.jumpAction.WasPerformedThisFrame())
+                    _player.velocity.y = Mathf.Sqrt(_player.jumpHeight * 2f * _player.gravity);
+                else if (!_player.isWASD()) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.IdleState]);
+                else _player.processMovement(PlayerActions.sprintAction.IsPressed() ?
+                                                _player.sprintSpeed :
+                                                _player.movementSpeed);
+
             }
 
-
-            
 
         }
         public void Exit()
