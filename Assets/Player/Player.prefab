@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   sprintSpeed: 10
-  jumpHeight: 1
+  jumpHeight: 0.75
   rotationSpeed: 10
   interractDistance: 6
   droppedOutlineColor: {r: 1, g: 0, b: 0.38862848, a: 1}
@@ -1998,6 +1998,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   velocity: {x: 0, y: -2, z: 0}
+  inputVector: {x: 0, y: 0}
 --- !u!1 &8563012258275556832
 GameObject:
   m_ObjectHideFlags: 0

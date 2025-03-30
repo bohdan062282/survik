@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 using gameCore;
 using System;
-using UnityEditor.Rendering.LookDev;
 
 
 public class PlayerController : MonoBehaviour
@@ -39,13 +37,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask groundLayerMask;
 
-    //temp
+    //public states
+    [HideInInspector] internal FallingPlayerState fallingPlayerState;
+
 
     [HideInInspector] public readonly float gravity = 9.81f;
 
     [HideInInspector] public Vector3 velocity = new Vector3(0.0f, -2.0f, 0.0f);
 
-    private Vector2 inputVector;
+    [HideInInspector] public Vector2 inputVector;
 
     private Inventory _inventory;
     private Item _focusItem;
@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        fallingPlayerState = new FallingPlayerState(this);
+
         _inventory = new Inventory(10, 5);
         _focusItem = null;
         _wasSelectedItemThisFrame = false;
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
         stateMachine1 = new StateMachine(new IState[] { new IdlePlayerState(this), 
                                                         new RunPlayerState(this),
-                                                        new FallingPlayerState(this)
+                                                        fallingPlayerState
                                                                                     });
 
         stateMachine2 = new StateMachine(new IState[] { new DefaultPlayerState(this),
@@ -125,11 +127,16 @@ public class PlayerController : MonoBehaviour
         inputVector = new Vector2(vec.x, vec.y);
     }
 
-    public void processMovement(float multiplayer)
+    public void processMovement(float multiplayer, float forwardForce, float rightForce)
     {
-        characterController.Move(   (transform.forward * inputVector.y * Time.deltaTime * multiplayer) +
-                                    (transform.right * inputVector.x * Time.deltaTime * multiplayer));
+        processMovement(transform.forward, transform.right, multiplayer, forwardForce, rightForce);
     }
+    public void processMovement(Vector3 forward, Vector3 right, float multiplayer, float forwardForce, float rightForce)
+    {
+        characterController.Move(   (forward * forwardForce * Time.deltaTime * multiplayer) +
+                                    (right * rightForce * Time.deltaTime * multiplayer));
+    }
+
 
     public void processRotation()
     {

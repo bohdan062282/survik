@@ -23,7 +23,9 @@ namespace gameCore
             if (!_player.characterController.isGrounded)
             {
                 _player.velocity.y -= _player.gravity * Time.deltaTime;
-                _player.processMovement(2.0f);
+
+                _player.processMovement(PlayerForward, PlayerRight, 0.7f, ForcesXZ.y, ForcesXZ.x);
+
             }
             else
             {
@@ -38,8 +40,16 @@ namespace gameCore
         {
             Debug.Log("Exit " + getName());
 
+            ForcesXZ = Vector2.zero;
+            PlayerForward = Vector3.zero;
+            PlayerRight = Vector3.zero;
+
         }
         public string getName() { return Type.ToString(); }
+
+        public Vector2 ForcesXZ { get; set; } = new Vector2(0.0f, 0.0f);
+        public Vector3 PlayerForward { get; set; } = new Vector3(0.0f, 0.0f, 0.0f);
+        public Vector3 PlayerRight { get; set; } = new Vector3(0.0f, 0.0f, 0.0f);
     }
 }
 

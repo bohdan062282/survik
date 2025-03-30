@@ -18,9 +18,19 @@ namespace gameCore
         }
         public void Update()
         {
+            Debug.Log(_player.characterController.velocity.ToString() + " ; " + _player.velocity.ToString());
 
+            if (!_player.characterController.isGrounded)
+            {
+                _player.fallingPlayerState.ForcesXZ = _player.inputVector * (PlayerActions.sprintAction.IsPressed() ?
+                                                                                _player.sprintSpeed :
+                                                                                _player.movementSpeed);
 
-            if (!_player.characterController.isGrounded) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.FallingState]);
+                _player.fallingPlayerState.PlayerForward = _player.transform.forward;
+                _player.fallingPlayerState.PlayerRight = _player.transform.right;
+
+                _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.FallingState]);
+            }
             else
             {
                 if (_player.velocity.y < 0) _player.velocity.y = -2.0f;
@@ -29,7 +39,7 @@ namespace gameCore
                 else if (!_player.isWASD()) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.IdleState]);
                 else _player.processMovement(PlayerActions.sprintAction.IsPressed() ?
                                                 _player.sprintSpeed :
-                                                _player.movementSpeed);
+                                                _player.movementSpeed, _player.inputVector.y, _player.inputVector.x);
 
             }
 
