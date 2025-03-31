@@ -39,7 +39,8 @@ public class PolygonSpawner : MonoBehaviour
 
             item = new Item(    itemPreferences.id,
                                 Resources.Load<GameObject>("Items/" + name + "/" + name),
-                                Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), name, itemPreferences.height, itemPreferences.width,
+                                Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), 
+                                name, itemPreferences.itemRarity, itemPreferences.height, itemPreferences.width,
                                 Resources.Load<GameObject>("Items/" + name + "/" + name + "Active"));
 
             item.Instantiate(transform.position);
@@ -50,7 +51,8 @@ public class PolygonSpawner : MonoBehaviour
 
             item = new StandingItem(    itemPreferences.id,
                                         Resources.Load<GameObject>("Items/" + name + "/" + name),
-                                        Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), name, itemPreferences.height, itemPreferences.width,
+                                        Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), 
+                                        name, itemPreferences.itemRarity, itemPreferences.height, itemPreferences.width,
                                         Resources.Load<GameObject>("Items/" + name + "/" + name + "Placing"),
                                         Resources.Load<GameObject>("Items/" + name + "/" + name + "Standing"),
                                         Resources.Load<GameObject>("Items/" + name + "/" + name + "Ghost"));
@@ -63,7 +65,8 @@ public class PolygonSpawner : MonoBehaviour
 
             item = new GunItem( itemPreferences.id,
                                 Resources.Load<GameObject>("Items/" + name + "/" + name),
-                                Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), name, itemPreferences.height, itemPreferences.width,
+                                Resources.Load<Sprite>("Items/" + name + "/" + name + "Texture"), 
+                                name, itemPreferences.itemRarity, itemPreferences.height, itemPreferences.width,
                                 Resources.Load<GameObject>("Items/" + name + "/" + name + "Active"));
 
             item.Instantiate(transform.position);

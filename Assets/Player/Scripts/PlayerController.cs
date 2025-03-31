@@ -17,7 +17,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.0f, 5.0f)] public float jumpHeight;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
     [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
-    [SerializeField] private Color droppedOutlineColor;
+    [Space(10)]
+    [SerializeField] private Color commonOutlineColor;
+    [SerializeField] private Color rareOutlineColor;
+    [SerializeField] private Color mythicalOutlineColor;
+    [SerializeField] private Color legendaryOutlineColor;
     [SerializeField] private Color standingOutlineColor;
     [Space(10)]
 
@@ -56,7 +60,11 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        Item.droppedOutlineColor = droppedOutlineColor;
+        Item.rarityOutlineColors[ItemRarity.COMMON] = commonOutlineColor;
+        Item.rarityOutlineColors[ItemRarity.RARE] = rareOutlineColor;
+        Item.rarityOutlineColors[ItemRarity.MYTHICAL] = mythicalOutlineColor;
+        Item.rarityOutlineColors[ItemRarity.LEGENDARY] = legendaryOutlineColor;
+
         StandingItem.standingOutlineColor = standingOutlineColor;
     }
     void Start()

@@ -12,9 +12,9 @@ public class StandingItem : Item
     private GameObject _ghostObject;
 
 
-    public StandingItem(int id, GameObject prefab, Sprite iconSprite, string name, int height, int width, 
+    public StandingItem(int id, GameObject prefab, Sprite iconSprite, string name, ItemRarity rarity, int height, int width, 
                         GameObject activeItemPrefab, GameObject standingObjectPrefab, GameObject ghostObjectPrefab)
-            : base(id, prefab, iconSprite, name, height, width, activeItemPrefab)
+            : base(id, prefab, iconSprite, name, rarity, height, width, activeItemPrefab)
     {
         _standingObjectPrefab = standingObjectPrefab;
         _ghostObjectPrefab = ghostObjectPrefab;

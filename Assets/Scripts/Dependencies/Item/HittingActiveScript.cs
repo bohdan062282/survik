@@ -10,8 +10,6 @@ public class HittingActiveScript : ActiveItemScript
     protected float _hitDistance = 2.0f;
     protected float _damage = 10.0f;
 
-    protected bool _canHit = true;
-
 
     public override void initialize(PlayerController playerController, int id)
     {
@@ -23,8 +21,6 @@ public class HittingActiveScript : ActiveItemScript
     }
     public override void interract()
     {
-
-        _canHit = false;
 
         animator.SetBool("Attack", true);
 
@@ -38,7 +34,6 @@ public class HittingActiveScript : ActiveItemScript
     }
     public void onAnimationEnd()
     {
-        _canHit = true;
 
         animator.SetBool("Attack", false);
     }

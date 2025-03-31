@@ -1970,8 +1970,11 @@ MonoBehaviour:
   jumpHeight: 0.75
   rotationSpeed: 10
   interractDistance: 6
-  droppedOutlineColor: {r: 1, g: 0, b: 0.38862848, a: 1}
-  standingOutlineColor: {r: 0, g: 0.164778, b: 1, a: 1}
+  commonOutlineColor: {r: 0.7207546, g: 0.7207546, b: 0.7207546, a: 1}
+  rareOutlineColor: {r: 0.08118899, g: 0.24167679, b: 0.6830188, a: 1}
+  mythicalOutlineColor: {r: 0.7056604, g: 0.21169804, b: 0.5074748, a: 1}
+  legendaryOutlineColor: {r: 1, g: 0, b: 0, a: 1}
+  standingOutlineColor: {r: 0.5842166, g: 0, b: 1, a: 1}
   UIScript:
     targetItemText: {fileID: 5954324824751826305}
     item1Icon: {fileID: 7571589281126039820}

@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: 
   height: 0
   width: 0
-  itemRarity: 0
+  itemRarity: 1
   itemType: 2

@@ -4,8 +4,8 @@ using gameCore;
 public class GunItem : Item
 {
 
-    public GunItem(     int id, GameObject prefab, Sprite iconSprite, string name, int height, int width,
-                        GameObject activeItemPrefab) : base(id, prefab, iconSprite, name, height, width, activeItemPrefab)
+    public GunItem(     int id, GameObject prefab, Sprite iconSprite, string name, ItemRarity rarity, int height, int width,
+                        GameObject activeItemPrefab) : base(id, prefab, iconSprite, name, rarity, height, width, activeItemPrefab)
     {
 
     }

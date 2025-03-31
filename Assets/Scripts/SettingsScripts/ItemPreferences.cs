@@ -1,4 +1,5 @@
 using UnityEngine;
+using gameCore;
 
 [CreateAssetMenu(fileName = "ItemPreferences", menuName = "Survik settings/ItemPreferences")]
 public class ItemPreferences : ScriptableObject
@@ -18,7 +19,6 @@ public class ItemPreferences : ScriptableObject
 
 
     public enum ItemType { Default, Standing, Gun }
-    public enum ItemRarity { Red, Green, Blue }
 }
 
 

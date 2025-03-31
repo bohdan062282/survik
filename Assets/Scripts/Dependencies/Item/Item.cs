@@ -10,10 +10,11 @@ namespace gameCore
 {
     public class Item
     {
-        public static UnityEngine.Color droppedOutlineColor = UnityEngine.Color.yellow;
+        public static Dictionary<ItemRarity, UnityEngine.Color> rarityOutlineColors = new Dictionary<ItemRarity, UnityEngine.Color>();
 
         private int _id;
         private string _name;
+        private ItemRarity _rarity;
         private Vector2Int _size;
         private GameObject _prefab;
         private Sprite _icon;
@@ -22,10 +23,11 @@ namespace gameCore
         protected GameObject _activeItemGameObject;
         protected PlayerController _playerController;
 
-        public Item(int id, GameObject prefab, Sprite iconSprite, string name, int height, int width, GameObject activeItemPrefab)
+        public Item(int id, GameObject prefab, Sprite iconSprite, string name, ItemRarity rarity, int height, int width, GameObject activeItemPrefab)
         {
             _id = id;
             _name = name;
+            _rarity = rarity;
             _prefab = prefab;
             _icon = iconSprite;
             _size = new Vector2Int(height, width);
@@ -51,7 +53,7 @@ namespace gameCore
             if (outlineScr != null)
             {
                 outlineScr.enabled = true;
-                outlineScr.OutlineColor = droppedOutlineColor;
+                outlineScr.OutlineColor = rarityOutlineColors[_rarity];
             }
         }
         public virtual void onFocusExit()
@@ -127,4 +129,5 @@ namespace gameCore
         
     }
     public enum ItemState { DROPPED, ININVENTORY, STAND };
+    public enum ItemRarity { COMMON, RARE, MYTHICAL, LEGENDARY }
 }

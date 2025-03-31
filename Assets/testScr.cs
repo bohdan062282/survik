@@ -6,8 +6,6 @@ public class testScr : MonoBehaviour
 
     void Start()
     {
-        Item.droppedOutlineColor = UnityEngine.Color.magenta;
-        StandingItem.standingOutlineColor = UnityEngine.Color.yellow;
 
 
 
