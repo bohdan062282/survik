@@ -19,10 +19,7 @@ public class HittingActiveScript : ActiveItemScript
 
         _playerController = playerController;
 
-        transform.SetParent(playerController.ActiveObjectTransform);
-
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        setOrigin();
     }
     public override void interract()
     {
@@ -31,6 +28,13 @@ public class HittingActiveScript : ActiveItemScript
 
         animator.SetBool("Attack", true);
 
+    }
+    public override void setOrigin()
+    {
+        transform.SetParent(_playerController.ActiveObjectTransform);
+
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
     public void onAnimationEnd()
     {

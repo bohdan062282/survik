@@ -3,7 +3,7 @@ using UnityEngine;
 public class ActiveItemScript : MonoBehaviour
 {
 
-    protected PlayerController _playerController;
+    public PlayerController _playerController;
     protected int _itemID;
 
     void Start()
@@ -23,14 +23,18 @@ public class ActiveItemScript : MonoBehaviour
 
         _playerController = playerController;
 
-        transform.SetParent(playerController.PlacebleObjectTransform);
-
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        setOrigin();
     }
     public virtual void interract()
     {
 
+    }
+    public virtual void setOrigin()
+    {
+        transform.SetParent(_playerController.PlacebleObjectTransform);
+
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
 
 }

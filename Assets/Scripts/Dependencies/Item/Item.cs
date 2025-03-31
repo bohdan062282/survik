@@ -85,11 +85,20 @@ namespace gameCore
             _droppedGameObject.transform.Rotate(new Vector3(0.0f, Yrotation, 0.0f));
 
             Rigidbody rb = _droppedGameObject.GetComponent<Rigidbody>();
-            if (rb != null ) rb.AddForce(force, ForceMode.Impulse);
+            if (rb != null )
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+
+                rb.AddForce(force, ForceMode.Impulse);
+            }
             
         }
         public virtual Item select()
         {
+            ActiveItemScript activeItemScript = _activeItemGameObject.GetComponent<ActiveItemScript>();
+            activeItemScript.setOrigin();
+
             _activeItemGameObject.SetActive(true);
 
             return this;

@@ -28,10 +28,7 @@ public class GunActiveScript : ActiveItemScript
 
         _playerController = playerController;
 
-        transform.SetParent(playerController.ActiveObjectTransform);
-
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        setOrigin();
 
         bulletPool = new BulletPool(magSize);
 
@@ -47,7 +44,13 @@ public class GunActiveScript : ActiveItemScript
             _releaseStartTime = Time.time;
         }
 
+    }
+    public override void setOrigin()
+    {
+        transform.SetParent(_playerController.ActiveObjectTransform);
 
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
     public void switchMode()
     {
