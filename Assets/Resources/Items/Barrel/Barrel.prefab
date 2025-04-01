@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2622070628589478069}
   - component: {fileID: 4517977264279165797}
   - component: {fileID: -3667742007722260414}
-  - component: {fileID: 4183517645171064775}
+  - component: {fileID: 2531382650151217730}
   m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
@@ -181,7 +181,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &4183517645171064775
+--- !u!114 &2531382650151217730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,6 +190,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6800690333703492085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f97c41e7417c024458250ae90c983820, type: 3}
+  m_Script: {fileID: 11500000, guid: b07144de999843d479c3113466d6c9d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

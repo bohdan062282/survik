@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104d0244d644c17468caa7f6d2ffc934, type: 3}
   m_Name: GasCylinder
   m_EditorClassIdentifier: 
-  id: 6
+  id: 7
   itemName: GasCylinder
   height: 4
   width: 3
+  itemRarity: 0
+  itemType: 0

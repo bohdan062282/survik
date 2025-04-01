@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9025198937717544746}
   - component: {fileID: 6546832892208866272}
   - component: {fileID: 1450742864829788506}
-  - component: {fileID: 8560050954209955671}
   - component: {fileID: 3270981955055869648}
   - component: {fileID: -5880541628130250406}
+  - component: {fileID: 2030046883296381469}
   m_Layer: 6
   m_Name: Flask
   m_TagString: Untagged
@@ -112,18 +112,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1388986636967069719, guid: 0c70a1c8c591d1f4caf785297bccc393, type: 3}
---- !u!114 &8560050954209955671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745661115560378933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea62cb06239463c40a99dcd88667d547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &3270981955055869648
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,3 +157,15 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2030046883296381469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745661115560378933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07144de999843d479c3113466d6c9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

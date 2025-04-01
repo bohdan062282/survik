@@ -570,9 +570,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9204023048446131512}
   - component: {fileID: 5561653152597092104}
-  - component: {fileID: -5691516311558613297}
   - component: {fileID: -4888473898218967374}
   - component: {fileID: 1804564164235370148}
+  - component: {fileID: -1791822238754687747}
   m_Layer: 6
   m_Name: SubmachineGun
   m_TagString: Untagged
@@ -623,18 +623,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-5691516311558613297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8426396110273374082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ead1eac67dd6b4baddc58a656297d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-4888473898218967374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +662,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.76, y: 0.26, z: 0.04}
   m_Center: {x: 0.075, y: 0.15, z: 0}
+--- !u!114 &-1791822238754687747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426396110273374082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07144de999843d479c3113466d6c9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &64331305
 PrefabInstance:
   m_ObjectHideFlags: 0

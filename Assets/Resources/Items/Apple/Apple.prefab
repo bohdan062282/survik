@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 242888891679208086}
   - component: {fileID: 1691035442019398703}
   - component: {fileID: 7638992881200997940}
-  - component: {fileID: 4891620767558721503}
   - component: {fileID: 8031716408389628713}
+  - component: {fileID: 2666534809482182975}
   m_Layer: 6
   m_Name: Apple
   m_TagString: Untagged
@@ -138,18 +138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &4891620767558721503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1755865475335770947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a46940db6e1528943ab1d1770c04bd29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8031716408389628713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +156,15 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2666534809482182975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755865475335770947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07144de999843d479c3113466d6c9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

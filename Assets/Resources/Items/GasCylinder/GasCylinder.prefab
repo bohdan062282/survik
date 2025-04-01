@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 6082298127282826415}
   - component: {fileID: 7189841218173952778}
   - component: {fileID: 4909914491957319616}
-  - component: {fileID: 218938447538323434}
   - component: {fileID: 5493544858490781670}
   - component: {fileID: 8671781684461125430}
   - component: {fileID: 1038851124429044603}
   - component: {fileID: 8252481462196495753}
+  - component: {fileID: 7583775765603613840}
   m_Layer: 6
   m_Name: GasCylinder
   m_TagString: Untagged
@@ -92,18 +92,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &218938447538323434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6855456404778989077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c1975b74006c844aa421209b3f2dbd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5493544858490781670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,3 +181,15 @@ CapsuleCollider:
   m_Height: 0.5269042
   m_Direction: 1
   m_Center: {x: -0.000010885298, y: 0.2634521, z: 0.00018455833}
+--- !u!114 &7583775765603613840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855456404778989077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07144de999843d479c3113466d6c9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

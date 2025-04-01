@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6362086534254668212}
   - component: {fileID: -2183135698843364050}
   - component: {fileID: 3843585209263894416}
-  - component: {fileID: -1391811448040413364}
+  - component: {fileID: 5511122405263877684}
   m_Layer: 6
   m_Name: CampingAxe
   m_TagString: Untagged
@@ -156,7 +156,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.13554367, y: 0.31475395, z: 0.032267325}
   m_Center: {x: 0.043145094, y: 0.23232079, z: 0.0002536485}
---- !u!114 &-1391811448040413364
+--- !u!114 &5511122405263877684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,6 +165,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3290598117132601010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b5d54f34d796404e897ad221a44a65b, type: 3}
+  m_Script: {fileID: 11500000, guid: b07144de999843d479c3113466d6c9d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

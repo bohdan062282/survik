@@ -3,7 +3,8 @@ using UnityEngine;
 public class ActiveItemScript : MonoBehaviour
 {
 
-    public PlayerController _playerController;
+    [HideInInspector] public PlayerController _playerController;
+
     protected int _itemID;
 
     void Start()

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4631227197124283102}
   - component: {fileID: 551028588124034934}
   - component: {fileID: 6497523130108082252}
-  - component: {fileID: 2802892493918737582}
   - component: {fileID: 8611065405304632830}
+  - component: {fileID: 7446132933729754181}
   m_Layer: 6
   m_Name: Cement
   m_TagString: Untagged
@@ -138,18 +138,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5457473, y: 0.9018779, z: 0.19460605}
   m_Center: {x: -0.00042112172, y: 0.44379574, z: 0.00012713671}
---- !u!114 &2802892493918737582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6576822161247775499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5e56d6eaf8fc3b4380d5165835b6998, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8611065405304632830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +156,15 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &7446132933729754181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576822161247775499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07144de999843d479c3113466d6c9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

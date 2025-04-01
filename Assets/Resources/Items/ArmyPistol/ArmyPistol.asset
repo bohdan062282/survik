@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104d0244d644c17468caa7f6d2ffc934, type: 3}
   m_Name: ArmyPistol
   m_EditorClassIdentifier: 
-  id: 11
+  id: 10
   itemName: 
   height: 2
   width: 2
