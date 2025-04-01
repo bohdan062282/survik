@@ -54,6 +54,7 @@ namespace gameCore
             {
                 outlineScr.enabled = true;
                 outlineScr.OutlineColor = rarityOutlineColors[_rarity];
+                outlineScr.OutlineWidth = 3.0f;
             }
         }
         public virtual void onFocusExit()

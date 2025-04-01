@@ -77,6 +77,7 @@ public class StandingItem : Item
             {
                 outlineScr.enabled = true;
                 outlineScr.OutlineColor = Item.rarityOutlineColors[_rarity];
+                outlineScr.OutlineWidth = 3.0f;
             }
         }
         else base.onFocusEnter();

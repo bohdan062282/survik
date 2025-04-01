@@ -18,7 +18,6 @@ namespace gameCore
         }
         public void Update()
         {
-            Debug.Log(_player.characterController.velocity.ToString() + " ; " + _player.velocity.ToString());
 
             if (!_player.characterController.isGrounded)
             {
