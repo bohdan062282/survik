@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
         Item.rarityOutlineColors[ItemRarity.MYTHICAL] = mythicalOutlineColor;
         Item.rarityOutlineColors[ItemRarity.LEGENDARY] = legendaryOutlineColor;
 
-        StandingItem.standingOutlineColor = standingOutlineColor;
     }
     void Start()
     {
@@ -217,6 +216,7 @@ public class PlayerController : MonoBehaviour
                 if (_focusItem != newFocusItem)
                 {
                     UIScript.targetItemText.text = newFocusItem.getName();
+                    UIScript.targetItemText.color = Item.rarityOutlineColors[newFocusItem.getRarity()];
                     _focusItem.onFocusExit();
                     newFocusItem.onFocusEnter();
                     _focusItem = newFocusItem;
@@ -225,6 +225,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 UIScript.targetItemText.text = newFocusItem.getName();
+                UIScript.targetItemText.color = Item.rarityOutlineColors[newFocusItem.getRarity()];
                 newFocusItem.onFocusEnter();
                 _focusItem = newFocusItem;
             }

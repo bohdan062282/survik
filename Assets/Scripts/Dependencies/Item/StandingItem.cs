@@ -3,8 +3,6 @@ using gameCore;
 
 public class StandingItem : Item
 {
-    public static UnityEngine.Color standingOutlineColor = UnityEngine.Color.green;
-
 
     private GameObject _standingObjectPrefab;
     private GameObject _standingObject;
@@ -78,7 +76,7 @@ public class StandingItem : Item
             if (outlineScr != null)
             {
                 outlineScr.enabled = true;
-                outlineScr.OutlineColor = standingOutlineColor;
+                outlineScr.OutlineColor = Item.rarityOutlineColors[_rarity];
             }
         }
         else base.onFocusEnter();

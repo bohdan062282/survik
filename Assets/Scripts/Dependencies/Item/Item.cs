@@ -14,7 +14,7 @@ namespace gameCore
 
         private int _id;
         private string _name;
-        private ItemRarity _rarity;
+        protected ItemRarity _rarity;
         private Vector2Int _size;
         private GameObject _prefab;
         private Sprite _icon;
@@ -121,6 +121,7 @@ namespace gameCore
             _size.y = temp;
         }
         public string getName() { return _name; }
+        public ItemRarity getRarity() => _rarity;
         public Sprite getIcon() { return _icon; }
         public Vector2Int getSize() { return _size; }
         public Vector2Int InventoryPosition { get; set; }
