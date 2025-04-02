@@ -168,17 +168,25 @@ public class PlayerController : MonoBehaviour
     }
     public void processInteractAction()
     {
-        if (_focusItem != null && _focusItem.IsDropped)
+        if (_focusItem != null)
         {
-            if (_inventory.addItem(_focusItem))
+            if (_focusItem.State == ItemState.DROPPED)
             {
-                _focusItem.take(this);
+                if (_inventory.addItem(_focusItem))
+                {
+                    _focusItem.take(this);
 
-                UIScript.updateToolbar(_inventory.Items);
+                    UIScript.updateToolbar(_inventory.Items);
+                }
+                else
+                {
+                    _focusItem.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
+                }
             }
-            else
+            else if (_focusItem.State == ItemState.STAND)
             {
-                _focusItem.drop(cameraTarget.transform.position, transform.rotation.eulerAngles.y, cameraTarget.transform.forward * 5.0f);
+                StandingItem standingItem = _focusItem as StandingItem;
+                standingItem.onButton_F_Standing();
             }
         } 
     }

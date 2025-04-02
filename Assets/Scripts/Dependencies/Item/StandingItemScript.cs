@@ -22,5 +22,9 @@ public class StandingItemScript : MonoBehaviour, IItem
     {
         _item = itemObject;
     }
+    public virtual void onInterract()
+    {
+        Debug.Log("Interracted with " + _item.getName());
+    }
     public Item getItemObject() => _item;
 }

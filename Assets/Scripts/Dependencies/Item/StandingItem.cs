@@ -59,6 +59,8 @@ public class StandingItem : Item
         //be carefull mby add base method
         //base.leftMouseClick();
 
+        State = ItemState.STAND;
+
         _standingObject.SetActive(true);
         
         (Vector3, Vector3) transformParam = _playerController.getPlaceblePosition();
@@ -69,7 +71,7 @@ public class StandingItem : Item
     }
     public override void onFocusEnter()
     {
-        if (_standingObject.active)
+        if (State == ItemState.STAND)
         {
             Outline outlineScr = _standingObject.GetComponent<Outline>();
 
@@ -85,7 +87,7 @@ public class StandingItem : Item
     }
     public override void onFocusExit()
     {
-        if (_standingObject.active)
+        if (State == ItemState.STAND)
         {
             Outline outlineScr = _standingObject.GetComponent<Outline>();
 
@@ -95,6 +97,10 @@ public class StandingItem : Item
             }
         }
         else base.onFocusExit();
+    }
+    public void onButton_F_Standing()
+    {
+        _standingObject.GetComponent<StandingItemScript>().onInterract();
     }
 
 }

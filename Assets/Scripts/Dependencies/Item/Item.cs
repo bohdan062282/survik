@@ -32,9 +32,8 @@ namespace gameCore
             _icon = iconSprite;
             _size = new Vector2Int(height, width);
             _activeItemPrefab = activeItemPrefab;
+            State = ItemState.DROPPED;
 
-            //refactor
-            IsDropped = true;
         }
         public virtual void Instantiate(Vector3 position)
         {
@@ -68,7 +67,7 @@ namespace gameCore
         }
         public virtual void take(PlayerController playerController)
         {
-            IsDropped = false;
+            State = ItemState.ININVENTORY;
 
             _droppedGameObject.SetActive(false);
 
@@ -79,7 +78,7 @@ namespace gameCore
         }
         public void drop(Vector3 position, float Yrotation, Vector3 force)
         {
-            IsDropped = true;
+            State = ItemState.DROPPED;
 
             _droppedGameObject.SetActive(true);
 
@@ -127,7 +126,7 @@ namespace gameCore
         public Vector2Int getSize() { return _size; }
         public Vector2Int InventoryPosition { get; set; }
         public bool IsRotated { get; set; } = false;
-        public bool IsDropped { get; private set; }
+        public ItemState State { get; protected set; }
         
     }
     public enum ItemState { DROPPED, ININVENTORY, STAND };

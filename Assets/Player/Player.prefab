@@ -1991,7 +1991,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 4593075016360823292}
   itemLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   hittableLayerMask:
     serializedVersion: 2
     m_Bits: 2048
