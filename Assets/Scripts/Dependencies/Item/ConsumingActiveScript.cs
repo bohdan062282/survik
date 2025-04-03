@@ -8,7 +8,7 @@ public class ConsumingActiveScript : ActiveItemScript
     [SerializeField] private float Food;
     [SerializeField] private float Water;
 
-    [SerializeField] private Animator animator;
+    [SerializeField] protected Animator animator;
 
 
     private ConsumingParams _consumingParams;
@@ -22,8 +22,6 @@ public class ConsumingActiveScript : ActiveItemScript
     }
     public override void interract()
     {
-        base.interract();
-
         animator.SetBool("IsConsuming", true);
     }
     public void onConsumed()

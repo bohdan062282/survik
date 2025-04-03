@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Apple
+  m_Name: SmallCannedFood
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: IsConsuming
@@ -48,7 +48,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 935348d7569f5264c84d6e9c21e79c65, type: 2}
+  m_Motion: {fileID: 7400000, guid: 493ac62523b39dc4496f1765aba7fdf5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
