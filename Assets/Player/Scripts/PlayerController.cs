@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(5.0f, 20.0f)] public float movementSpeed;
     [SerializeField][Range(5.0f, 20.0f)] public float sprintSpeed;
     [SerializeField][Range(0.0f, 5.0f)] public float jumpHeight;
+    [SerializeField][Range(0.0f, 4.0f)] public float itemRotationSpeed;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
     [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
     [Space(10)]
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
 
     [HideInInspector] public readonly float gravity = 9.81f;
+    [HideInInspector] public float placingRotationDelta = 0.0f;
 
     [HideInInspector] public Vector3 velocity = new Vector3(0.0f, -2.0f, 0.0f);
 
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private Inventory _inventory;
     private Item _focusItem;
     private bool _wasSelectedItemThisFrame;
+    
 
     internal StateMachine stateMachine1 { get; private set; }
     internal StateMachine stateMachine2 { get; private set; }
@@ -119,7 +122,6 @@ public class PlayerController : MonoBehaviour
         stateMachine2.Update();
 
 
-        processRotation();
         processVelocity();
 
 

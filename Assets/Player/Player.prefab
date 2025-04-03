@@ -1968,6 +1968,7 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 7
   jumpHeight: 0.75
+  itemRotationSpeed: 2
   rotationSpeed: 10
   interractDistance: 6
   commonOutlineColor: {r: 0.7207546, g: 0.7207546, b: 0.7207546, a: 1}
@@ -2000,6 +2001,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  placingRotationDelta: 0
   velocity: {x: 0, y: -2, z: 0}
   inputVector: {x: 0, y: 0}
 --- !u!1 &8563012258275556832

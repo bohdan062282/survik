@@ -6,6 +6,7 @@ public static class PlayerActions
     public static readonly InputAction movementAction = InputSystem.actions.FindAction("Movement");
     public static readonly InputAction rotationAction = InputSystem.actions.FindAction("Rotation");
     public static readonly InputAction clickAction = InputSystem.actions.FindAction("LMC");
+    public static readonly InputAction rightClickAction = InputSystem.actions.FindAction("RMC");
     public static readonly InputAction interractAction = InputSystem.actions.FindAction("Interract");
     public static readonly InputAction dropAction = InputSystem.actions.FindAction("Drop");
     public static readonly InputAction sprintAction = InputSystem.actions.FindAction("Sprint");

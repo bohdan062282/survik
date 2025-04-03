@@ -68,6 +68,9 @@ public class StandingItem : Item
         _standingObject.transform.position = transformParam.Item1;
         _standingObject.transform.up = transformParam.Item2;
 
+        _standingObject.transform.forward = _playerController.transform.forward;
+        _standingObject.transform.Rotate(new Vector3(0.0f, _playerController.placingRotationDelta, 0.0f));
+
     }
     public override void onFocusEnter()
     {

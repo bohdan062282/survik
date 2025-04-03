@@ -21,6 +21,11 @@ namespace gameCore
         public void Update()
         {
 
+            if (PlayerActions.rightClickAction.IsPressed())
+                _player.placingRotationDelta += PlayerActions.rotationAction.ReadValue<Vector2>().x * Time.deltaTime * _player.itemRotationSpeed;
+            else
+                _player.processRotation();
+
             if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInteractAction();
 
             if (PlayerActions.clickAction.WasPerformedThisFrame())
@@ -71,6 +76,8 @@ namespace gameCore
         public void Exit()
         {
             Debug.Log("Exit " + getName());
+
+            _player.placingRotationDelta = 0.0f;
 
         }
         public string getName() { return Type.ToString(); }

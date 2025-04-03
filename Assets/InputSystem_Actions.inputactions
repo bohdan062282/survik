@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RMC",
+                    "type": "Button",
+                    "id": "3f2731dd-746a-4279-9bd9-0c0659394477",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interract",
                     "type": "Button",
                     "id": "ba5d635f-cb2f-4d69-9829-cd620e00636f",
@@ -368,6 +377,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchGunMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86f2a3e0-6e89-42b5-a72c-ed0b4b715c80",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RMC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

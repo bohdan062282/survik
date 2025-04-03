@@ -19,6 +19,8 @@ namespace gameCore
         public void Update()
         {
 
+            _player.processRotation();
+
             if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInteractAction();
             
             GunItem gun = _player.getInventory().ActiveItem as GunItem;
