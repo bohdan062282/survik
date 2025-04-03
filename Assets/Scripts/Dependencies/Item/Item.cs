@@ -96,6 +96,14 @@ namespace gameCore
             }
             
         }
+        public virtual void destroy()
+        {
+            _droppedGameObject.SetActive(false);
+            _activeItemGameObject.SetActive(false);
+
+            GameObject.Destroy(_activeItemGameObject);
+            GameObject.Destroy(_droppedGameObject, 1.0f);
+        }
         public virtual Item select()
         {
             ActiveItemScript activeItemScript = _activeItemGameObject.GetComponent<ActiveItemScript>();

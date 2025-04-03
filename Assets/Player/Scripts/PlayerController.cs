@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector2 inputVector;
 
     private Inventory _inventory;
+    private HealthSystem _healthSystem;
+
     private Item _focusItem;
     private bool _wasSelectedItemThisFrame;
     
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
         fallingPlayerState = new FallingPlayerState(this);
 
         _inventory = new Inventory(10, 5);
+        _healthSystem = new HealthSystem();
         _focusItem = null;
         _wasSelectedItemThisFrame = false;
 
@@ -146,7 +149,6 @@ public class PlayerController : MonoBehaviour
                                     (right * rightForce * Time.deltaTime * multiplayer));
     }
 
-
     public void processRotation()
     {
         Vector2 vec = PlayerActions.rotationAction.ReadValue<Vector2>();
@@ -160,6 +162,14 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(velocity * Time.deltaTime);
         
+    }
+    public void useConsumable(ConsumingActiveScript.ConsumingParams consumingParams)
+    {
+        _healthSystem.affectConsumable(consumingParams);
+
+        Item item = processDropAction();
+
+        if (item != null) item.destroy();
     }
     public bool processSelectItemAction(int index)
     {
@@ -192,11 +202,13 @@ public class PlayerController : MonoBehaviour
             }
         } 
     }
-    public void processDropAction()
+    public Item processDropAction()
     {
+        Item item;
+
         UIScript.unSetSelectedIcon();
 
-        Item item = _inventory.dropActiveItem();
+        item = _inventory.dropActiveItem();
         if (item != null)
         {
             item.unSelect();
@@ -204,6 +216,8 @@ public class PlayerController : MonoBehaviour
         }
 
         UIScript.updateToolbar(_inventory.Items);
+
+        return item;
     }
     private void updateFocusItem()
     {
