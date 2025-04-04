@@ -1,5 +1,6 @@
 using System;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Perspective : MonoBehaviour
@@ -8,15 +9,21 @@ public class Perspective : MonoBehaviour
     [SerializeField] private CinemachineCamera firstPersonCamera;
     [SerializeField] private CinemachineCamera thirdPersonCamera;
 
+    //mesh
+    [SerializeField] private GameObject[] mesh;
+
+    [SerializeReference] private PlayerController player;
     [SerializeField] private RectTransform sight;
 
     [SerializeField] private PerspectiveType perspective;
 
-
+    private Camera _mainCamera;
     private Vector2 _cameraDelta;
 
     void Start()
     {
+
+        _mainCamera = Camera.main;
 
         if (perspective == PerspectiveType.FIRST) switchToFirst();
         else switchToThird();
@@ -27,7 +34,7 @@ public class Perspective : MonoBehaviour
         
         if (perspective == PerspectiveType.THIRD)
         {
-
+            processSight();
         }
 
     }
@@ -48,6 +55,11 @@ public class Perspective : MonoBehaviour
 
         thirdPersonCamera.gameObject.SetActive(false);
 
+        foreach (GameObject go in mesh)
+        {
+            go.SetActive(false);
+        }
+
         sight.anchoredPosition = Vector2.zero;
     }
     private void switchToThird()
@@ -56,7 +68,17 @@ public class Perspective : MonoBehaviour
 
         thirdPersonCamera.gameObject.SetActive(true);
 
+        foreach (GameObject go in mesh)
+        {
+            go.SetActive(true);
+        }
+
     }
+    private void processSight()
+    {
+        
+    }
+
 
     public enum PerspectiveType { FIRST, THIRD }
 

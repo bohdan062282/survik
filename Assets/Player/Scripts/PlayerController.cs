@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.0f, 5.0f)] public float jumpHeight;
     [SerializeField][Range(0.0f, 4.0f)] public float itemRotationSpeed;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
-    [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
+    [SerializeField][Range(0.0f, 10.0f)] public float interractDistance;
     [Space(10)]
     [SerializeField] private Color commonOutlineColor;
     [SerializeField] private Color rareOutlineColor;
