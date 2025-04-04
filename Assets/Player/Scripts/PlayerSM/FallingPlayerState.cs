@@ -29,8 +29,15 @@ namespace gameCore
             }
             else
             {
-                if (_player.isWASD()) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.RunState]);
-                else _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.IdleState]);
+                if (_player.isWASD())
+                {
+                    _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.RunState]);
+                    _player.animator.SetBool(PlayerAnimationParams.isMove, true);
+                }
+                else
+                {
+                    _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.IdleState]);
+                }
             }
 
       
@@ -39,6 +46,8 @@ namespace gameCore
         public void Exit()
         {
             Debug.Log("Exit " + getName());
+
+            _player.animator.SetBool(PlayerAnimationParams.isFalling, false);
 
             ForcesXZ = Vector2.zero;
             PlayerForward = Vector3.zero;

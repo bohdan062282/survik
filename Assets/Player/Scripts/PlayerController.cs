@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [SerializeField] public UIScript UIScript;
     [SerializeField] public CharacterController characterController;
+    [SerializeField] public Animator animator;
     [SerializeField] public Transform cameraTarget;
     [SerializeField] public Transform cameraTransform;
 

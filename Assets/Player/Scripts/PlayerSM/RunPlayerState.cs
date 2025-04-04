@@ -29,6 +29,7 @@ namespace gameCore
                 _player.fallingPlayerState.PlayerRight = _player.transform.right;
 
                 _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.FallingState]);
+                _player.animator.SetBool(PlayerAnimationParams.isFalling, true);
             }
             else
             {
@@ -47,6 +48,8 @@ namespace gameCore
         public void Exit()
         {
             Debug.Log("Exit " + getName());
+
+            _player.animator.SetBool(PlayerAnimationParams.isMove, false);
 
         }
         public string getName() { return Type.ToString(); }
