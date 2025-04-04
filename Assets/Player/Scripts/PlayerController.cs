@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [Header("References")]
     [Space(10)]
+    [SerializeField] private Perspective perspective;
     [SerializeField] public UIScript UIScript;
     [SerializeField] public CharacterController characterController;
     [SerializeField] public Animator animator;
@@ -128,6 +129,8 @@ public class PlayerController : MonoBehaviour
 
         processVelocity();
 
+
+        if (PlayerActions.perspectiveChange.WasPerformedThisFrame()) perspective.switchPerspective();
 
 
         _wasSelectedItemThisFrame = false;

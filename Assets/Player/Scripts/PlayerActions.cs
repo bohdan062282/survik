@@ -12,6 +12,7 @@ public static class PlayerActions
     public static readonly InputAction sprintAction = InputSystem.actions.FindAction("Sprint");
     public static readonly InputAction jumpAction = InputSystem.actions.FindAction("Jump");
     public static readonly InputAction switchGunModeAction = InputSystem.actions.FindAction("SwitchGunMode");
+    public static readonly InputAction perspectiveChange = InputSystem.actions.FindAction("Perspective");
 
     public static readonly InputAction item1 = InputSystem.actions.FindAction("Item1");
     public static readonly InputAction item2 = InputSystem.actions.FindAction("Item2");
