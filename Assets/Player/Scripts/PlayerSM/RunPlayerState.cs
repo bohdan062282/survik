@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.Splines.Interpolators;
 
 namespace gameCore
 {
     internal class RunPlayerState:IState
     {
+
+        private float _leftRightTransitionSpeed = 20.0f;
+        private float _sprintTransitionSpeed = 20.0f;
+        private float _forwardBackwardTransitionSpeed = 20.0f;
+
         private readonly PlayerController _player;
         public StateType Type { get; private set; } = StateType.RunState;
         public bool Equals(IState state) { return this.Type.Equals(state.Type); }
@@ -37,9 +43,39 @@ namespace gameCore
                 if (PlayerActions.jumpAction.WasPerformedThisFrame())
                     _player.velocity.y = Mathf.Sqrt(_player.jumpHeight * 2f * _player.gravity);
                 else if (!_player.isWASD()) _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.IdleState]);
-                else _player.processMovement(PlayerActions.sprintAction.IsPressed() ?
+                else
+                {
+                    bool isSprint = PlayerActions.sprintAction.IsPressed() && _player.inputVector.x == 0 && _player.inputVector.y > 0;
+
+                    _player.processMovement(isSprint ?
                                                 _player.sprintSpeed :
                                                 _player.movementSpeed, _player.inputVector.y, _player.inputVector.x);
+
+                    if (isSprint) _player.animator.SetFloat(PlayerAnimationParams.sprintValue,
+                                                            Mathf.Lerp( _player.animator.GetFloat(PlayerAnimationParams.sprintValue),
+                                                                        1.0f, _sprintTransitionSpeed * Time.deltaTime));
+                    else _player.animator.SetFloat(PlayerAnimationParams.sprintValue,
+                                                   Mathf.Lerp(_player.animator.GetFloat(PlayerAnimationParams.sprintValue),
+                                                   0.0f, _sprintTransitionSpeed * Time.deltaTime));
+
+                    _player.animator.SetFloat(  PlayerAnimationParams.leftRightValue, 
+                                                Mathf.Lerp( _player.animator.GetFloat(PlayerAnimationParams.leftRightValue),
+                                                            _player.inputVector.x, _leftRightTransitionSpeed * Time.deltaTime));
+                    
+                    if (_player.inputVector.y >= 0)
+                    {
+                        _player.animator.SetFloat(PlayerAnimationParams.forwardBackwardValue,
+                                                  Mathf.Lerp(_player.animator.GetFloat(PlayerAnimationParams.forwardBackwardValue),
+                                                  1.0f, _forwardBackwardTransitionSpeed * Time.deltaTime));
+                    }
+                    else
+                    {
+                        _player.animator.SetFloat(PlayerAnimationParams.forwardBackwardValue,
+                                                  Mathf.Lerp(_player.animator.GetFloat(PlayerAnimationParams.forwardBackwardValue),
+                                                  -1.0f, _forwardBackwardTransitionSpeed * Time.deltaTime));
+                    }
+
+                }
 
             }
 
