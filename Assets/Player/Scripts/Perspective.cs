@@ -6,21 +6,20 @@ using UnityEngine;
 public class Perspective : MonoBehaviour
 {
 
-    public GameObject sphere;
+    [SerializeField][Range(0.0f, 100.0f)] private float sightTransitionSpeed;
 
     [SerializeField] private CinemachineCamera firstPersonCamera;
     [SerializeField] private CinemachineCamera thirdPersonCamera;
 
-    //mesh
     [SerializeField] private GameObject[] mesh;
 
     [SerializeReference] private PlayerController player;
+
     [SerializeField] private RectTransform sight;
 
     [SerializeField] private PerspectiveType perspective;
 
     private Camera _mainCamera;
-    private Vector2 _cameraDelta;
 
     void Start()
     {
@@ -42,14 +41,8 @@ public class Perspective : MonoBehaviour
     }
     public void switchPerspective()
     {
-        if (perspective == PerspectiveType.FIRST)
-        {
-            switchToThird();
-        }
-        else
-        {
-            switchToFirst();
-        }
+        if (perspective == PerspectiveType.FIRST) switchToThird();
+        else switchToFirst();
     }
     private void switchToFirst()
     {
@@ -82,24 +75,20 @@ public class Perspective : MonoBehaviour
         if (Physics.Raycast(firstPersonCamera.gameObject.transform.position,
                             firstPersonCamera.gameObject.transform.forward, out hit, 20.0f))
         {
-            Vector3 screenPos = _mainCamera.WorldToScreenPoint(hit.point);
-            Resolution resolution = Screen.currentResolution;
-
-            Vector2 vec = new Vector2(screenPos.x - (resolution.width / 2.0f), screenPos.y - (resolution.height / 2.0f));
-            sight.anchoredPosition = vec;
-            Debug.Log(vec);
-            sphere.transform.position = hit.point;
+            setSight(hit.point);
         }
         else
         {
-            Vector3 screenPos = _mainCamera.WorldToScreenPoint(firstPersonCamera.gameObject.transform.position + firstPersonCamera.gameObject.transform.forward.normalized * 21.0f);
-            Resolution resolution = Screen.currentResolution;
-
-            Vector2 vec = new Vector2(screenPos.x - (resolution.width / 2.0f), screenPos.y - (resolution.height / 2.0f));
-            sight.anchoredPosition = vec;
-            Debug.Log(vec);
-            sphere.transform.position = hit.point;
+            setSight(   firstPersonCamera.gameObject.transform.position + 
+                        firstPersonCamera.gameObject.transform.forward.normalized * 21.0f);
         }
+    }
+    private void setSight(Vector3 position)
+    {
+        Vector3 screenPos = _mainCamera.WorldToScreenPoint(position);
+
+        Vector2 vec2 = new Vector2(screenPos.x - (Screen.width / 2.0f), screenPos.y - (Screen.height / 2.0f));
+        sight.anchoredPosition = Vector2.Lerp(sight.anchoredPosition, vec2, sightTransitionSpeed * Time.deltaTime);
     }
 
 

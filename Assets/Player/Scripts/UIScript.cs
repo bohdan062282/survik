@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.Splines;
 using UnityEngine.UI;
 using gameCore;
+using Unity.VisualScripting;
 
 [Serializable]
 public class UIScript
 {
-    [SerializeField] public TextMeshProUGUI targetItemText;
+    [SerializeField] private TextMeshProUGUI targetItemText;
 
     [SerializeField] private Image item1Icon;
     [SerializeField] private Image item2Icon;
@@ -60,5 +61,11 @@ public class UIScript
             else setIcon(null, i);
         }
     }
+    public void updateFocusText(Item item)
+    {
+        targetItemText.text = item.getName();
+        targetItemText.color = Item.rarityOutlineColors[item.getRarity()];
+    }
+    public void resetFocusText() => targetItemText.text = "";
     public int getToolbarSize() => _itemIcons.Count;
 }

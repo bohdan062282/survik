@@ -17,49 +17,49 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.0f, 5.0f)] public float jumpHeight;
     [SerializeField][Range(0.0f, 4.0f)] public float itemRotationSpeed;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
-    [SerializeField][Range(0.0f, 10.0f)] public float interractDistance;
+    [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;
     [Space(10)]
     [SerializeField] private Color commonOutlineColor;
     [SerializeField] private Color rareOutlineColor;
     [SerializeField] private Color mythicalOutlineColor;
     [SerializeField] private Color legendaryOutlineColor;
-    [SerializeField] private Color standingOutlineColor;
     [Space(10)]
+
+    [Space(10)]
+    [Header("Scripts")]
+    [Space(10)]
+    [SerializeField] private Perspective perspective;
+    [SerializeField] public UIScript UIScript;
 
     [Space(10)]
     [Header("References")]
     [Space(10)]
-    [SerializeField] private Perspective perspective;
-    [SerializeField] public UIScript UIScript;
     [SerializeField] public CharacterController characterController;
     [SerializeField] public Animator animator;
-    [SerializeField] public Transform cameraTarget;
-    [SerializeField] public Transform cameraTransform;
-
-    [SerializeField] public LayerMask itemLayerMask;
-    [SerializeField] public LayerMask hittableLayerMask;
+    [SerializeField] private Transform cameraTarget;
+    [SerializeField] private Transform cameraTransform;
 
     [SerializeField] public Transform PlacebleObjectTransform;
     [SerializeField] public Transform ActiveObjectTransform;
 
+    [SerializeField] private LayerMask itemLayerMask;
+    [SerializeField] public LayerMask hittableLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
 
-    //public states
-    [HideInInspector] internal FallingPlayerState fallingPlayerState;
-
-
     [HideInInspector] public readonly float gravity = 9.81f;
+
     [HideInInspector] public float placingRotationDelta = 0.0f;
-
     [HideInInspector] public Vector3 velocity = new Vector3(0.0f, -2.0f, 0.0f);
-
     [HideInInspector] public Vector2 inputVector;
+
+    [HideInInspector] internal FallingPlayerState fallingPlayerState;
 
     private Inventory _inventory;
     private HealthSystem _healthSystem;
 
     private Item _focusItem;
     private bool _wasSelectedItemThisFrame;
+    private (Vector3 position, Vector3 normal) _placebleLastTransform;
     
 
     internal StateMachine stateMachine1 { get; private set; }
@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
         _healthSystem = new HealthSystem();
         _focusItem = null;
         _wasSelectedItemThisFrame = false;
+        _placebleLastTransform = new (Vector3.zero, Vector3.zero);
 
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -156,10 +157,9 @@ public class PlayerController : MonoBehaviour
     public void processRotation()
     {
         Vector2 vec = PlayerActions.rotationAction.ReadValue<Vector2>();
+
         transform.Rotate(new Vector3(0.0f, vec.x * Time.deltaTime * rotationSpeed, 0.0f));
-
         cameraTarget.Rotate(new Vector3(-vec.y * Time.deltaTime * rotationSpeed, 0.0f, 0.0f));
-
     }
     private void processVelocity()
     {
@@ -177,7 +177,6 @@ public class PlayerController : MonoBehaviour
     }
     public bool processSelectItemAction(int index)
     {
-        
         UIScript.setSelectedIcon(index);
 
         return _inventory.selectItem(index, PlacebleObjectTransform);
@@ -235,7 +234,7 @@ public class PlayerController : MonoBehaviour
                 _focusItem.onFocusExit();
                 _focusItem = null;
             }
-            UIScript.targetItemText.text = "";
+            UIScript.resetFocusText();
         }
         else
         {
@@ -243,8 +242,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (_focusItem != newFocusItem)
                 {
-                    UIScript.targetItemText.text = newFocusItem.getName();
-                    UIScript.targetItemText.color = Item.rarityOutlineColors[newFocusItem.getRarity()];
+                    UIScript.updateFocusText(newFocusItem);
                     _focusItem.onFocusExit();
                     newFocusItem.onFocusEnter();
                     _focusItem = newFocusItem;
@@ -252,8 +250,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                UIScript.targetItemText.text = newFocusItem.getName();
-                UIScript.targetItemText.color = Item.rarityOutlineColors[newFocusItem.getRarity()];
+                UIScript.updateFocusText(newFocusItem);
                 newFocusItem.onFocusEnter();
                 _focusItem = newFocusItem;
             }
@@ -290,8 +287,15 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interractDistance, groundLayerMask))
-            return (hit.point, hit.normal);
-        else return (cameraTransform.position + (cameraTransform.forward * interractDistance), transform.up);
+        {
+            _placebleLastTransform.position = Vector3.Lerp(_placebleLastTransform.position, hit.point, 30.0f * Time.deltaTime);
+            _placebleLastTransform.normal = Vector3.Lerp(_placebleLastTransform.normal, hit.normal, 30.0f * Time.deltaTime);
+        }
+        else
+        {
+            _placebleLastTransform = (cameraTransform.position + (cameraTransform.forward * interractDistance), transform.up);
+        }
+        return _placebleLastTransform;
     }
 
     public bool getWasSelectedThisFrame() => _wasSelectedItemThisFrame;
