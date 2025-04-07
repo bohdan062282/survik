@@ -31,7 +31,10 @@ namespace gameCore
             {
                 if (_player.velocity.y < 0) _player.velocity.y = -2.0f;
                 if (PlayerActions.jumpAction.WasPerformedThisFrame())
+                {
                     _player.velocity.y = Mathf.Sqrt(_player.jumpHeight * 2f * _player.gravity);
+                    _player.animator.SetBool(PlayerAnimationParams.isJump, true);
+                }
                 else if (_player.isWASD())
                 {
                     _player.stateMachine1.TransitionTo(_player.stateMachine1.States[StateType.RunState]);

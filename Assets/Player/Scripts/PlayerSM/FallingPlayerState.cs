@@ -48,6 +48,7 @@ namespace gameCore
             Debug.Log("Exit " + getName());
 
             _player.animator.SetBool(PlayerAnimationParams.isFalling, false);
+            _player.animator.SetBool(PlayerAnimationParams.isJump, false);
 
             ForcesXZ = Vector2.zero;
             PlayerForward = Vector3.zero;
