@@ -9,4 +9,5 @@ public static class PlayerAnimationParams
     public static readonly int forwardBackwardValue = Animator.StringToHash("ForwardBackward");
     public static readonly int leftRightValue = Animator.StringToHash("LeftCenterRight");
     public static readonly int sprintValue = Animator.StringToHash("SprintValue");
+    public static readonly int runningJumpValue = Animator.StringToHash("RunningJumpValue");
 }

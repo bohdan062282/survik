@@ -34,6 +34,7 @@ namespace gameCore
                 {
                     _player.velocity.y = Mathf.Sqrt(_player.jumpHeight * 2f * _player.gravity);
                     _player.animator.SetBool(PlayerAnimationParams.isJump, true);
+                    _player.animator.SetFloat(PlayerAnimationParams.runningJumpValue, 0.0f);
                 }
                 else if (_player.isWASD())
                 {
