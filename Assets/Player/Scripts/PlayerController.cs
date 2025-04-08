@@ -96,7 +96,8 @@ public class PlayerController : MonoBehaviour
 
         stateMachine2 = new StateMachine(new IState[] { new DefaultPlayerState(this),
                                                         new PlacingPlayerState(this),
-                                                        new ShootingPlayerState(this)});
+                                                        new ShootingPlayerState(this),
+                                                        new CombatPlayerState(this)});
 
 
 

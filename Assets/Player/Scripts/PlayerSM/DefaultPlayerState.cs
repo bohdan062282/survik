@@ -4,6 +4,9 @@ namespace gameCore
 {
     internal class DefaultPlayerState : IState
     {
+
+        private float animationTransitionSpeed = 25.0f;
+
         private readonly PlayerController _player;
         public StateType Type { get; private set; } = StateType.DefaultState;
         public bool Equals(IState state) { return this.Type.Equals(state.Type); }
@@ -18,11 +21,16 @@ namespace gameCore
         }
         public void Update()
         {
+            _player.animator.SetLayerWeight(1, Mathf.Lerp(_player.animator.GetLayerWeight(1), 0.0f, animationTransitionSpeed * Time.deltaTime));
 
             _player.processRotation();
 
             if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInteractAction();
 
+            if (PlayerActions.rightClickAction.IsPressed())
+            {
+                _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.CombatState]);
+            }
             if (PlayerActions.clickAction.WasPerformedThisFrame())
             {
                 Item item = _player.getInventory().ActiveItem;
