@@ -27,8 +27,6 @@ namespace gameCore
 
             if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInteractAction();
 
-            Debug.Log(_player.getInventory().ActiveItem);
-
             if (PlayerActions.rightClickAction.IsPressed() && _player.getInventory().ActiveItem == null)
             {
                 _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.CombatState]);

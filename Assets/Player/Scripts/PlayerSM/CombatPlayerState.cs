@@ -29,7 +29,11 @@ namespace gameCore
             if (!PlayerActions.rightClickAction.IsPressed())
             {
                 _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.DefaultState]);
-            }    
+            }
+            else if (PlayerActions.clickAction.WasPerformedThisFrame())
+            {
+                _player.animator.SetBool(PlayerAnimationParams.isPunch, true);
+            }
 
 
 
@@ -42,5 +46,3 @@ namespace gameCore
         public string getName() { return Type.ToString(); }
     }
 }
-
-

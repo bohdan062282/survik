@@ -51,11 +51,11 @@ namespace gameCore
                 {
                     bool isSprint = PlayerActions.sprintAction.IsPressed() && _player.inputVector.x == 0 && _player.inputVector.y > 0;
 
-                    _player.processMovement(isSprint ?
+                    _player.processMovement(isSprint && _player.stateMachine2.CurrentState.Type != StateType.CombatState ?
                                                 _player.sprintSpeed :
                                                 _player.movementSpeed, _player.inputVector.y, _player.inputVector.x);
 
-                    if (isSprint) _player.animator.SetFloat(PlayerAnimationParams.sprintValue,
+                    if (isSprint && _player.stateMachine2.CurrentState.Type != StateType.CombatState) _player.animator.SetFloat(PlayerAnimationParams.sprintValue,
                                                             Mathf.Lerp( _player.animator.GetFloat(PlayerAnimationParams.sprintValue),
                                                                         1.0f, _sprintTransitionSpeed * Time.deltaTime));
                     else _player.animator.SetFloat(PlayerAnimationParams.sprintValue,
