@@ -27,11 +27,13 @@ namespace gameCore
 
             if (PlayerActions.interractAction.WasPerformedThisFrame()) _player.processInteractAction();
 
-            if (PlayerActions.rightClickAction.IsPressed())
+            Debug.Log(_player.getInventory().ActiveItem);
+
+            if (PlayerActions.rightClickAction.IsPressed() && _player.getInventory().ActiveItem == null)
             {
                 _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.CombatState]);
             }
-            if (PlayerActions.clickAction.WasPerformedThisFrame())
+            else if (PlayerActions.clickAction.WasPerformedThisFrame())
             {
                 Item item = _player.getInventory().ActiveItem;
                 if (item != null) item.leftMouseClick();

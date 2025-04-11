@@ -118,7 +118,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(characterController.isGrounded);
 
         setInputVector();
 

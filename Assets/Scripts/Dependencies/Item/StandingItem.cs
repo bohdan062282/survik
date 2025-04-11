@@ -54,7 +54,7 @@ public class StandingItem : Item
 
         _ghostObject.SetActive(false);
     }
-    public override void leftMouseClick()
+    public override bool leftMouseClick()
     {
         //be carefull mby add base method
         //base.leftMouseClick();
@@ -66,10 +66,11 @@ public class StandingItem : Item
         (Vector3, Vector3) transformParam = _playerController.getPlaceblePosition();
 
         _standingObject.transform.position = transformParam.Item1;
-        _standingObject.transform.up = transformParam.Item2;
-
         _standingObject.transform.forward = _playerController.transform.forward;
+        _standingObject.transform.up = transformParam.Item2;
         _standingObject.transform.Rotate(new Vector3(0.0f, _playerController.placingRotationDelta, 0.0f));
+
+        return true;
 
     }
     public override void onFocusEnter()

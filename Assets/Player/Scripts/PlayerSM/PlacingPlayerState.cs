@@ -84,16 +84,18 @@ namespace gameCore
         private void processStandingInteractAction()
         {
             Item item = _player.getInventory().dropActiveItem();
-            if (item != null)
+
+            if (item != null && item.leftMouseClick())
             {
                 _player.UIScript.unSetSelectedIcon();
-                item.unSelect();
 
-                item.leftMouseClick();
+                item.unSelect();
 
                 _player.UIScript.updateToolbar(_player.getInventory().Items);
 
+                _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.DefaultState]);
             }
+
         }
     }
 }

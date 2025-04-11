@@ -117,10 +117,12 @@ namespace gameCore
         {
             _activeItemGameObject.SetActive(false);
         }
-        public virtual void leftMouseClick()
+        public virtual bool leftMouseClick()
         {
             ActiveItemScript activeScript = _activeItemGameObject.GetComponent<ActiveItemScript>();
             if (activeScript != null) activeScript.interract();
+
+            return true;
         }
         public void rotateSize()
         {
