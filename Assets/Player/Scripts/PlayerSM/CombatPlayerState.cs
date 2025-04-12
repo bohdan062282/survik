@@ -30,9 +30,10 @@ namespace gameCore
             {
                 _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.DefaultState]);
             }
-            else if (PlayerActions.clickAction.WasPerformedThisFrame())
+            else if (PlayerActions.clickAction.WasPerformedThisFrame() && _player.combatScript.CanPunch)
             {
                 _player.animator.SetBool(PlayerAnimationParams.isPunch, true);
+                _player.combatScript.startPunch();
             }
 
 

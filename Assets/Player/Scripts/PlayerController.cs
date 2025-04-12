@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector3 velocity = new Vector3(0.0f, -2.0f, 0.0f);
     [HideInInspector] public Vector2 inputVector;
 
+    [SerializeReference] public CombatScript combatScript;
+
     [HideInInspector] internal FallingPlayerState fallingPlayerState;
 
     private Inventory _inventory;
