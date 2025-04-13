@@ -32,7 +32,10 @@ public class CombatScript : MonoBehaviour
         }
     }
     public void startPunch() => CanPunch = false;
-    public void onPunchHit() => hit();
+    public void onPunchHit()
+    {
+        if (_player.stateMachine2.CurrentState.Type == gameCore.StateType.CombatState) hit();
+    }
     public void onPunchEnd()
     {
         CanPunch = true;

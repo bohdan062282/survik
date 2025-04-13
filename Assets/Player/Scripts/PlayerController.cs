@@ -14,7 +14,9 @@ public class PlayerController : MonoBehaviour
     [Space(10)]
     [SerializeField][Range(5.0f, 20.0f)] public float movementSpeed;
     [SerializeField][Range(5.0f, 20.0f)] public float sprintSpeed;
-    [SerializeField][Range(0.0f, 5.0f)] public float jumpHeight;
+    [SerializeField][Range(0.0f, 1.0f)] public float jumpBaseHeight;
+    [SerializeField][Range(0.0f, 1.0f)] public float speedToJumpHeightRatio;
+    [SerializeField][Range(0.0f, 1.0f)] public float jumpForceLoss;
     [SerializeField][Range(0.0f, 4.0f)] public float itemRotationSpeed;
     [SerializeField][Range(10.0f, 300.0f)] private float rotationSpeed;
     [SerializeField][Range(0.0f, 10.0f)] private float interractDistance;

@@ -42,7 +42,7 @@ namespace gameCore
                 if (_player.velocity.y < 0) _player.velocity.y = -2.0f;
                 if (PlayerActions.jumpAction.WasPerformedThisFrame())
                 {
-                    _player.velocity.y = Mathf.Sqrt(_player.jumpHeight * 2f * _player.gravity);
+                    _player.velocity.y = Mathf.Sqrt((_player.jumpBaseHeight + ((1.0f-_player.speedToJumpHeightRatio)*_player.jumpForceLoss)) * 2f * _player.gravity);
                     _player.animator.SetBool(PlayerAnimationParams.isJump, true);
                     _player.animator.SetFloat(PlayerAnimationParams.runningJumpValue, 1.0f);
                 }  

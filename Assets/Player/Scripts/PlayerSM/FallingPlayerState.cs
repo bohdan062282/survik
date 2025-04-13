@@ -24,7 +24,7 @@ namespace gameCore
             {
                 _player.velocity.y -= _player.gravity * Time.deltaTime;
 
-                _player.processMovement(PlayerForward, PlayerRight, 0.7f, ForcesXZ.y, ForcesXZ.x);
+                _player.processMovement(PlayerForward, PlayerRight, _player.speedToJumpHeightRatio, ForcesXZ.y, ForcesXZ.x);
 
             }
             else

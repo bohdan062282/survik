@@ -2079,7 +2079,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   sprintSpeed: 7
-  jumpHeight: 0.6
+  jumpBaseHeight: 0.6
+  speedToJumpHeightRatio: 0.8
+  jumpForceLoss: 0.8
   itemRotationSpeed: 2
   rotationSpeed: 10
   interractDistance: 6
@@ -2398,6 +2400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 2505467371002424722}
+  punchDistance: 0
 --- !u!4 &7554538234152134935 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1438546959266459337, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
