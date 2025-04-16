@@ -29,6 +29,7 @@ namespace gameCore
             if (!PlayerActions.rightClickAction.IsPressed())
             {
                 _player.stateMachine2.TransitionTo(_player.stateMachine2.States[StateType.DefaultState]);
+                _player.combatScript.onPunchEnd();
             }
             else if (PlayerActions.clickAction.WasPerformedThisFrame() && _player.combatScript.CanPunch)
             {
